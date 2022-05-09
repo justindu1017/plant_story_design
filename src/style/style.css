@@ -1,0 +1,67 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300&display=swap");
+html,
+body,
+#root {
+  font-family: "Noto Sans TC", sans-serif;
+
+  height: 100%;
+
+  font-size: medium;
+}
+
+html {
+  background-color: #e1e1db;
+}
+
+.bg-main {
+  background-color: #e1e1db;
+}
+
+.btn-mainStory {
+  color: white;
+  background-color: #9dbfbe;
+}
+
+.btn-mainStory:hover {
+  color: white;
+  background-color: #95b8b7;
+}
+
+.btn-subStory {
+  color: white;
+  background-color: #b3b435;
+}
+
+.btn-subStory:hover {
+  color: white;
+  background-color: #a5a52e;
+}
+.w-30 {
+  width: 30%;
+}
+
+.w-5 {
+  width: 5%;
+}
+
+.h-5 {
+  height: 5%;
+}
+textarea {
+  resize: none;
+}
+.foot {
+  height: 2rem;
+  position: sticky;
+  top: calc(100vh - 2rem);
+  bottom: 0;
+  background-color: #82847c;
+}
+
+.bg-MissionStart {
+  background-color: #9dbfbe;
+}
+
+.bg-MissionStart:hover {
+  background-color: #94b5b4;
+}
