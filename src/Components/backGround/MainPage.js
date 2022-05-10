@@ -35,7 +35,7 @@ export default class MainPage extends Component {
     },
   };
 
-  async componentDidMount() {
+  getInfo = async () => {
     const memberID = "62790d12cdcff414429e2e3c";
     const FetchgetActiveStory = new toFetch(
       "http://localhost:5000/api/storyProgress/getActiveStory",
@@ -49,6 +49,10 @@ export default class MainPage extends Component {
       .then((res) => {
         this.setState({ storyInfo: res[0] });
       });
+  };
+
+  async componentDidMount() {
+    await this.getInfo();
   }
 
   changeActivity = (com) => {
@@ -61,12 +65,14 @@ export default class MainPage extends Component {
   };
 
   render() {
+    console.log("State is ", this.state);
     return (
       <this.state.com
         counter={this.state.counter}
         storyInfo={this.state.storyInfo}
         changeActivity={this.changeActivity}
         rollBack={this.rollBack}
+        getInfo={this.getInfo}
         // from={this.state.com === Msg ? "Task" : ""}
       />
     );
