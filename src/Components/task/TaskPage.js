@@ -1,24 +1,28 @@
 import React, { Component } from "react";
 import FooterBanner from "../resources/FooterBanner";
 import Msg from "./Msg";
+import pic from "..\\..\\img\\res\\campus.png";
+import BGPic from "..\\..\\img\\res\\BGPic.jpg";
 
 export default class TaskPage extends Component {
   render() {
     return (
-      <div className="w-full bg-main h-100 pt-3">
-        <div className="h-25">我是圖片</div>
-        <div className="container">
+      <div className="w-full bg-main h-100">
+        <div className="h-25">
+          <img src={BGPic} alt="BGPic" className="w-100"></img>
+        </div>
+        <div className="container pt-3">
           <div>
             <div>
               <span>
-                <img alt="campus"></img>
+                <img src={pic} className="w-10" alt="campus"></img>
               </span>
               實業家任務
             </div>
 
             <div>
               <span>
-                <img alt="campus"></img>
+                <img src={pic} className="w-10" alt="campus"></img>
               </span>
               晚上時間在空曠戶外行走並記錄行走步數
             </div>
