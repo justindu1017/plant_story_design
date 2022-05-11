@@ -15,7 +15,7 @@ export default class Background extends Component {
       <div className="w-full bg-main h-100 pt-3">
         <div className="container d-flex justify-content-around mb-3">
           <Title TitleContent={this.props.storyInfo.storyTemplate.name} />
-          <CalProgress storyContent={this.props.storyInfo.storyTemplate} />
+          <CalProgress storyContent={this.props.storyInfo} />
         </div>
         <div className="container mb-5">
           <img className="float-end w-30 ms-2" src={pic} alt="星球圖片"></img>

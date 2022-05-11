@@ -4,10 +4,14 @@ import pp from "..\\..\\img\\res\\pp.png";
 export default class CalProgress extends Component {
   countComplete = () => {
     let progress = 0;
-    if (this.props.storyContent.taskStory) progress += 1;
-    this.props.storyContent.storySub.map((el) =>
-      el ? (progress += 1) : progress
-    );
+    if (this.props.storyContent.storyTemplate.taskStory) progress += 1;
+    for (
+      let index = 0;
+      index < this.props.storyContent.subProgress - 1;
+      index++
+    ) {
+      progress += 1;
+    }
     return progress;
   };
   render() {
