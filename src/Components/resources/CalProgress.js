@@ -28,7 +28,7 @@ export default class CalProgress extends Component {
           {Array.from(Array(4 - this.countComplete()), (e, i) => {
             return (
               <span key={i}>
-                <img className="w-15" src={ppc} alt="pp"></img>
+                <img className="w-15" src={pp} alt="pp"></img>
               </span>
             );
           })}
