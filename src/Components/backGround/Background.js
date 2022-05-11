@@ -9,6 +9,8 @@ import TaskBtn from "../resources/TaskBtn";
 
 export default class Background extends Component {
   render() {
+    console.log(this.props.storyInfo.subProgress === "1");
+
     return (
       <div className="w-full bg-main h-100 pt-3">
         <div className="container d-flex justify-content-around mb-3">
@@ -20,7 +22,7 @@ export default class Background extends Component {
 
           <div>{this.props.storyInfo.storyTemplate.background}</div>
 
-          {this.props.storyInfo.storyTemplate.storySub.length === 0 ? (
+          {this.props.storyInfo.subProgress === "1" ? (
             <NoNextPage />
           ) : (
             <GotoNextPage
@@ -40,6 +42,7 @@ export default class Background extends Component {
         <FooterBanner
           counter={this.props.counter}
           rollBack={this.props.rollBack}
+          storyInfo={this.props.storyInfo}
         />
       </div>
     );

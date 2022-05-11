@@ -8,7 +8,7 @@ export default class StorySub extends Component {
   render() {
     return (
       <div className=" bg-main h-100">
-        <div className="container pt-5 h-65 overflow-scroll">
+        <div className="container pt-5 h-60 overflow-scroll">
           <p>
             {this.props.storyInfo.storyTemplate.storySub[this.props.counter]}
           </p>
@@ -20,8 +20,7 @@ export default class StorySub extends Component {
             alt="故事圖片"
           ></img>
 
-          {this.props.storyInfo.storyTemplate.storySub.length - 1 >
-          this.props.counter ? (
+          {this.props.storyInfo.subProgress - 2 > this.props.counter ? (
             <GotoNextPage
               counter={this.props.counter}
               changeActivity={this.props.changeActivity}
@@ -36,6 +35,7 @@ export default class StorySub extends Component {
         <FooterBanner
           counter={this.props.counter}
           rollBack={this.props.rollBack}
+          storyInfo={this.props.storyInfo}
         />
       </div>
     );
