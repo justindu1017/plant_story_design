@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import Background from "./Background";
 import toFetch from "../../func/fetchC.js";
-import Msg from "../task/Msg";
 
 export default class MainPage extends Component {
   state = {
@@ -36,7 +35,7 @@ export default class MainPage extends Component {
   };
 
   getInfo = async () => {
-    const memberID = "62790d12cdcff414429e2e3c";
+    const memberID = await process.env.REACT_APP_MemberID;
     const FetchgetActiveStory = new toFetch(
       "http://localhost:5000/api/storyProgress/getActiveStory",
       {
@@ -49,6 +48,11 @@ export default class MainPage extends Component {
       .then((res) => {
         this.setState({ storyInfo: res[0] });
       });
+  };
+
+  resetState = () => {
+    this.setState({ counter: -1 });
+    this.setState({ com: Background });
   };
 
   async componentDidMount() {
@@ -65,7 +69,6 @@ export default class MainPage extends Component {
   };
 
   render() {
-    console.log("State is ", this.state);
     return (
       <this.state.com
         counter={this.state.counter}
@@ -73,7 +76,7 @@ export default class MainPage extends Component {
         changeActivity={this.changeActivity}
         rollBack={this.rollBack}
         getInfo={this.getInfo}
-        // from={this.state.com === Msg ? "Task" : ""}
+        resetState={this.resetState}
       />
     );
   }

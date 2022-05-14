@@ -23,7 +23,12 @@ export default class Background extends Component {
           <div>{this.props.storyInfo.storyTemplate.background}</div>
 
           {this.props.storyInfo.subProgress === "1" ? (
-            <NoNextPage />
+            <NoNextPage
+              storyInfo={this.props.storyInfo}
+              counter={this.props.counter}
+              changeActivity={this.props.changeActivity}
+              getInfo={this.props.getInfo}
+            />
           ) : (
             <GotoNextPage
               counter={this.props.counter}

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import FooterBanner from "../resources/FooterBanner";
 import GotoNextPage from "../resources/GotoNextPage";
 import NoNextPage from "../resources/NoNextPage";
+import TheEndBtn from "../resources/TheEndBtn";
 import pic from "..\\..\\img\\storyImg\\pict.png";
 
 export default class StorySub extends Component {
@@ -26,9 +27,18 @@ export default class StorySub extends Component {
               changeActivity={this.props.changeActivity}
             />
           ) : this.props.counter === 2 ? (
-            <div></div>
+            <TheEndBtn
+              storyInfo={this.props.storyInfo}
+              getInfo={this.props.getInfo}
+              resetState={this.props.resetState}
+            />
           ) : (
-            <NoNextPage />
+            <NoNextPage
+              storyInfo={this.props.storyInfo}
+              counter={this.props.counter}
+              changeActivity={this.props.changeActivity}
+              getInfo={this.props.getInfo}
+            />
           )}
         </div>
 
