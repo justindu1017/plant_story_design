@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import CalProgress from "../resources/CalProgress";
 import Title from "../resources/Title";
-import pic from "..\\..\\img\\planetImg\\planet-earth.png";
+import pic from "../../img/planetImg/planet-earth.png";
 import FooterBanner from "../resources/FooterBanner";
 import GotoNextPage from "../resources/GotoNextPage";
 import NoNextPage from "../resources/NoNextPage";

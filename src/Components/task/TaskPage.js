@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import FooterBanner from "../resources/FooterBanner";
 import Msg from "./Msg";
-import pic from "..\\..\\img\\res\\campus.png";
-import BGPic from "..\\..\\img\\res\\BGPic.jpg";
+import pic from "../../img/res/campus.png";
+import BGPic from "../../img/res/BGPic.jpg";
 
 export default class TaskPage extends Component {
   render() {

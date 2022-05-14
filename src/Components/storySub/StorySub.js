@@ -3,7 +3,7 @@ import FooterBanner from "../resources/FooterBanner";
 import GotoNextPage from "../resources/GotoNextPage";
 import NoNextPage from "../resources/NoNextPage";
 import TheEndBtn from "../resources/TheEndBtn";
-import pic from "..\\..\\img\\storyImg\\pict.png";
+import pic from "../../img/storyImg/pict.png";
 
 export default class StorySub extends Component {
   render() {

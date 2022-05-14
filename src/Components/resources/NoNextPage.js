@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import ReVisitDoctor from "../modal/ReVisitDoctor";
-import pic from "..\\..\\img\\res\\storytelling.png";
+import pic from "../../img/res/storytelling.png";
 
 export default class NoNextPage extends Component {
   render() {

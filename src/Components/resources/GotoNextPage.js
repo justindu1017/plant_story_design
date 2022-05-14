@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import StorySub from "../storySub/StorySub";
-import pic from "..\\..\\img\\res\\storytelling.png";
+import pic from "../../img/res/storytelling.png";
 
 export default class GotoNextPage extends Component {
   render() {

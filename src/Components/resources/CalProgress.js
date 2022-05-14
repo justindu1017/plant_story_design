@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import ppc from "..\\..\\img\\res\\ppc.png";
-import pp from "..\\..\\img\\res\\pp.png";
+import ppc from "../../img/res/ppc.png";
+import pp from "../../img/res/pp.png";
 export default class CalProgress extends Component {
   countComplete = () => {
     let progress = 0;
