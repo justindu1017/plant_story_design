@@ -9,8 +9,6 @@ import TaskBtn from "../resources/TaskBtn";
 
 export default class Background extends Component {
   render() {
-    console.log(this.props.storyInfo.subProgress === "1");
-
     return (
       <div className="w-full bg-main h-100 pt-3">
         <div className="container d-flex justify-content-around mb-3">

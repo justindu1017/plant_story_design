@@ -4,8 +4,8 @@ import toFetch from "../../func/fetchC.js";
 import MsgEL from "./MsgEL";
 
 export default class Msg extends Component {
-  getInfo = () => {
-    this.props.getInfo();
+  getInfo = (memberID) => {
+    this.props.getInfo(memberID);
   };
 
   sendMsg = (e) => {
@@ -50,7 +50,7 @@ export default class Msg extends Component {
         return res.json();
       })
       .then((res) => {
-        this.getInfo();
+        this.getInfo(this.props.storyInfo.member._id);
       })
       .catch(function (e) {
         console.log(e); // This is never called

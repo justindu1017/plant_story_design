@@ -16,6 +16,8 @@ export default class TheEndBtn extends Component {
       Number(this.props.storyInfo.storyTemplate.storyID) + 1,
       3
     );
+
+    console.log("nextStoryID = ", nextStoryID);
     const getNextStoryID = new toFetch(
       "http://localhost:5000/api/storyTemplate/getByStoryID",
       {
@@ -27,13 +29,14 @@ export default class TheEndBtn extends Component {
       .post()
       .then((res) => res.json())
       .then((res) => {
+        console.log("res", res);
         return res[0]._id;
       });
 
     await this.setCompletion(this.props.storyInfo._id);
     await this.bindNextStory(_id, this.props.storyInfo.member._id);
 
-    this.props.getInfo();
+    this.props.getInfo(this.props.storyInfo.member._id);
     this.props.resetState();
   };
 

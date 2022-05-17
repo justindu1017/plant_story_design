@@ -24,7 +24,7 @@ export default class ReVisitDoctor extends Component {
     };
     const f = new toFetch(url, head, JSON.stringify(body));
     await f.put();
-    this.props.getInfo();
+    this.props.getInfo(this.props.storyInfo.member._id);
     this.props.changeActivity(StorySub);
   };
 
