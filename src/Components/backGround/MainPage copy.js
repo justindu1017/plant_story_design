@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import React, { Component } from "react";
 import Background from "./Background";
 import toFetch from "../../func/fetchC.js";
@@ -159,27 +160,26 @@ export default class MainPage extends Component {
     let getName = await process.env.REACT_APP_LineName;
     const { StoryId } = this.props.match.params;
 
-    const liff = window.liff;
-
-    console.log(" is login ", liff.isLoggedIn());
-
-    if (!liff.isLoggedIn()) {
-      console.log("你還沒登入Line哦！");
-      const uri = window.location.href;
-      sessionStorage.setItem("liffLoginRedirect", uri);
-      liff.login();
-    } else {
-      // const liffLoginRedirect = sessionStorage.getItem("liffLoginRedirect");
-      // console.log("red = ", liffLoginRedirect);
-      // if (liffLoginRedirect) {
-      //   sessionStorage.removeItem("liffLoginRedirect");
-      //   window.location.href = liffLoginRedirect;
-      // }
-      liff.getProfile().then((res) => {
-        console.log(res);
-        getID = res.userId;
-      });
-    }
+    // await liff
+    //   .init({
+    //     liffId: "1656053787-a6qvwxW7",
+    //   })
+    //   .then(() => {
+    //     if (!liff.isLoggedIn()) {
+    //       console.log("你還沒登入Line哦！");
+    //       sessionStorage.setItem("liffLoginRedirect", window.location.href);
+    //       const uri = window.location.href;
+    //       liff.login({ redirectUri: uri });
+    //       // window.location.href = uri;
+    //     } else {
+    //       liff.getProfile().then((res) => {
+    //         getID = res.userId;
+    //       });
+    //     }
+    //   })
+    //   .catch((err) => {
+    //     console.log("初始化失敗");
+    //   });
 
     await this.getMemberID(getID, getName);
   }
@@ -208,6 +208,7 @@ export default class MainPage extends Component {
         resetState={this.resetState}
         gotoMain={this.gotoMain}
       />
+      // <BGStory counter={this.state.counter} />
     );
   }
 }

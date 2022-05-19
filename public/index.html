@@ -32,6 +32,17 @@
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
+    <script>
+      (async () => {
+        await liff.init({ liffId: "1656053787-a6qvwxW7" });
+        //   // if (new URL(window.location).searchParams.get("liff.state")) return;
+        const liffLoginRedirect = sessionStorage.getItem("liffLoginRedirect");
+        if (liffLoginRedirect) {
+          sessionStorage.removeItem("liffLoginRedirect");
+          location.href = liffLoginRedirect;
+        }
+      })();
+    </script>
     <div id="root"></div>
     <!--
       This HTML file is a template.
