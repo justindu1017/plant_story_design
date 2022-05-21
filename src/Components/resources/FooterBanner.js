@@ -6,25 +6,7 @@ import toFetch from "../../func/fetchC.js";
 
 export default class FooterBanner extends Component {
   styleToShow = this.props.counter < 0 && !this.props.from ? "d-none" : "btn";
-  // haveGOBACK = () => {
-  //   const url =
-  //     "http://localhost:5000/api/storyProgress/" + this.props.storyInfo._id;
-  //   const num =
-  //     this.props.storyInfo.subProgress > 3
-  //       ? "4"
-  //       : Number(this.props.storyInfo.subProgress) + 1;
 
-  //   const head = {
-  //     "Content-Type": "application/json",
-  //   };
-  //   const body = {
-  //     subProgress: String(num),
-  //   };
-
-  //   const f = new toFetch(url, head, JSON.stringify(body));
-
-  //   f.put();
-  // };
   render() {
     return (
       <div className=" w-100 foot ">

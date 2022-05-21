@@ -4,7 +4,7 @@ import pic from "../../img/res/remove.png";
 export default class NoPlanetEL extends Component {
   render() {
     return (
-      <div className="flex-row-item d-flex my-3">
+      <div className="flex-row-item d-flex my-2">
         <img
           className="m-auto"
           alt="NOPlanet"

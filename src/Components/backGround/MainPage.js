@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Background from "./Background";
 import toFetch from "../../func/fetchC.js";
 import BGStory from "./BGStory";
-
+import { useLocation } from "react-router-dom";
 export default class MainPage extends Component {
   state = {
     origin: Background,
@@ -140,7 +140,7 @@ export default class MainPage extends Component {
     await combineMemberTmp.post();
   };
 
-  getMemberID = async (LineID, LineName, StoryId) => {
+  getMemberID = async (LineID, LineName, StoryId = null, pathname) => {
     let ret;
     const FetchlineID = new toFetch(
       "http://localhost:5000/api/member/getByLineID/",
@@ -165,7 +165,7 @@ export default class MainPage extends Component {
       await this.getInfo(memberID, StoryId);
       this.setState({ com: BGStory });
     } else {
-      await this.getInfo(ret[0]._id, StoryId);
+      await this.getInfo(ret[0]._id, (StoryId = null));
     }
   };
 
@@ -184,6 +184,8 @@ export default class MainPage extends Component {
   };
 
   async componentDidMount() {
+    const { pathname } = this.props.location;
+
     this.props.com
       ? this.setState({ com: this.props.com, origin: this.props.com })
       : void 0;
@@ -206,7 +208,6 @@ export default class MainPage extends Component {
   }
 
   render() {
-    console.log("this.state.origin", this.state.origin);
     return (
       <this.state.com
         counter={this.state.counter}

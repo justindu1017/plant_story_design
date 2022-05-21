@@ -27,11 +27,15 @@ export default class StorySub extends Component {
               changeActivity={this.props.changeActivity}
             />
           ) : this.props.counter === 2 ? (
-            <TheEndBtn
-              storyInfo={this.props.storyInfo}
-              getInfo={this.props.getInfo}
-              resetState={this.props.resetState}
-            />
+            this.props.from ? (
+              void 0
+            ) : (
+              <TheEndBtn
+                storyInfo={this.props.storyInfo}
+                getInfo={this.props.getInfo}
+                resetState={this.props.resetState}
+              />
+            )
           ) : (
             <NoNextPage
               storyInfo={this.props.storyInfo}
