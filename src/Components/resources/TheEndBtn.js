@@ -17,7 +17,6 @@ export default class TheEndBtn extends Component {
       3
     );
 
-    console.log("nextStoryID = ", nextStoryID);
     const getNextStoryID = new toFetch(
       "http://localhost:5000/api/storyTemplate/getByStoryID",
       {
@@ -29,7 +28,6 @@ export default class TheEndBtn extends Component {
       .post()
       .then((res) => res.json())
       .then((res) => {
-        console.log("res", res);
         return res[0]._id;
       });
 
@@ -51,9 +49,7 @@ export default class TheEndBtn extends Component {
       })
     );
 
-    await setComplete.put().catch(() => {
-      console.log("err when set complete");
-    });
+    await setComplete.put().catch(() => {});
   };
 
   bindNextStory = async (storyTemplateID, memberID) => {
@@ -77,9 +73,7 @@ export default class TheEndBtn extends Component {
       JSON.stringify(bd)
     );
 
-    await bind.post().catch(() => {
-      console.log("err when set complete");
-    });
+    await bind.post().catch(() => {});
   };
 
   render() {

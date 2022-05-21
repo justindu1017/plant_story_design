@@ -46,6 +46,8 @@ export default class Background extends Component {
           counter={this.props.counter}
           rollBack={this.props.rollBack}
           storyInfo={this.props.storyInfo}
+          origin={this.props.origin}
+          from={this.props.from}
         />
       </div>
     );

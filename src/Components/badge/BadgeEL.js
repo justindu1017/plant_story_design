@@ -7,13 +7,7 @@ export default class BadgeEL extends Component {
     // return <div className="flex-row-item">{this.props.img}</div>;
     return (
       <div className="flex-row-item">
-        <img
-          className="m-auto"
-          alt="NOBADGE"
-          src={pic}
-          width="100"
-          heigh="200"
-        ></img>
+        <img className="m-auto" alt="NOBADGE" src={pic}></img>
       </div>
     );
   }

@@ -44,13 +44,11 @@ export default class PlanetHistoryPage extends Component {
   async componentDidMount() {
     let getID = await process.env.REACT_APP_LineID;
     const memberID = await this.getMemberByLineID(getID);
-    console.log("memberID = ", memberID);
     let memberInfo = await this.doFetch(memberID)
       .then((res) => res.json())
       .then((res) => {
         return res;
       });
-    console.log(memberInfo);
     memberInfo = this.resize(memberInfo, 12);
     this.setState({ memberInfo: memberInfo });
 

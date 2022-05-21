@@ -46,15 +46,12 @@ export default class Msg extends Component {
         return toStoryTemplate.put();
       })
       .then((res) => {
-        console.log("res", res);
         return res.json();
       })
       .then((res) => {
         this.getInfo(this.props.storyInfo.member._id);
       })
-      .catch(function (e) {
-        console.log(e); // This is never called
-      });
+      .catch(function (e) {});
   };
 
   render() {
@@ -93,6 +90,7 @@ export default class Msg extends Component {
         <FooterBanner
           counter={this.props.counter}
           rollBack={this.props.rollBack}
+          origin={this.props.origin}
           from="Task"
         />
       </div>

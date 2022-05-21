@@ -58,7 +58,7 @@ export default class BadgePage extends Component {
   }
   doFetch = (memberID) => {
     // fetch from server by memberID
-    return fetch("/api/storyProgress/getByMember", {
+    return fetch("http://localhost:5000/api/storyProgress/getByMember", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

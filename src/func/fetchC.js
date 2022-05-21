@@ -42,24 +42,3 @@ class toFetch {
 }
 
 export default toFetch;
-
-// async function add1() {
-//   const a = new toFetch(
-//     "http://localhost:5000/api/storyProgress/getActiveStory",
-//     {
-//       "Content-Type": "application/json",
-//     },
-//     JSON.stringify({ member: "6271349da3e29d4bc8f8bd6e" })
-//   );
-
-//   console.log(
-//     a
-//       .post()
-//       .then((res) => res.json())
-//       .then((res) => {
-//         console.log(res);
-//       })
-//   );
-// }
-
-// add1();

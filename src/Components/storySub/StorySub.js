@@ -46,6 +46,7 @@ export default class StorySub extends Component {
           counter={this.props.counter}
           rollBack={this.props.rollBack}
           storyInfo={this.props.storyInfo}
+          origin={this.props.origin}
         />
       </div>
     );

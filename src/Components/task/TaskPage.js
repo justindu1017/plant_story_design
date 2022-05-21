@@ -48,6 +48,7 @@ export default class TaskPage extends Component {
         <FooterBanner
           counter={this.props.counter}
           rollBack={this.props.rollBack}
+          origin={this.props.origin}
         />
       </div>
     );

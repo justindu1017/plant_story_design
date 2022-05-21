@@ -5,6 +5,7 @@ import BGStory from "./BGStory";
 
 export default class MainPage extends Component {
   state = {
+    origin: Background,
     com: Background,
     counter: -1,
     storyInfo: {
@@ -35,7 +36,7 @@ export default class MainPage extends Component {
     },
   };
 
-  getInfo = async (MemberID) => {
+  getInfo = async (MemberID, StoryId = null) => {
     const memberID = MemberID;
     const FetchgetActiveStory = new toFetch(
       "http://localhost:5000/api/storyProgress/getActiveStory",
@@ -44,18 +45,32 @@ export default class MainPage extends Component {
       },
       JSON.stringify({ member: memberID })
     );
-    FetchgetActiveStory.post()
+
+    const FetchgetStoryByID = new toFetch(
+      "http://localhost:5000/api/storyProgress/" + StoryId,
+      {
+        "Content-Type": "application/json",
+      }
+    );
+
+    const fetchRes = StoryId
+      ? FetchgetStoryByID.get()
+      : FetchgetActiveStory.post();
+
+    fetchRes
       .then((res) => res.json())
       .then((res) => {
-        this.setState({ storyInfo: res[0] });
+        this.setState({ storyInfo: res.length ? res[0] : res });
       });
   };
 
+  // TODO
   resetState = () => {
     this.setState({ counter: -1 });
     this.setState({ com: Background });
   };
 
+  // for newly created user
   createNewMember = async (LineID, LineName) => {
     let ret;
     let obj = {
@@ -79,6 +94,7 @@ export default class MainPage extends Component {
     return ret._id;
   };
 
+  // for newly created user
   getTMPByStoryID = async () => {
     // !!! conbine with TheEndBTN???
 
@@ -96,10 +112,10 @@ export default class MainPage extends Component {
       .then((res) => {
         return res[0]._id;
       });
-    console.log("get SId = ", _id);
     return _id;
   };
 
+  // for newly created user
   linkStory001 = async (memberID) => {
     const obj = {
       storyTemplate: await this.getTMPByStoryID(),
@@ -124,7 +140,7 @@ export default class MainPage extends Component {
     await combineMemberTmp.post();
   };
 
-  getMemberID = async (LineID, LineName) => {
+  getMemberID = async (LineID, LineName, StoryId) => {
     let ret;
     const FetchlineID = new toFetch(
       "http://localhost:5000/api/member/getByLineID/",
@@ -146,43 +162,12 @@ export default class MainPage extends Component {
       // no member, need to create
       memberID = await this.createNewMember(LineID, LineName);
       await this.linkStory001(memberID);
-      await this.getInfo(memberID);
-
+      await this.getInfo(memberID, StoryId);
       this.setState({ com: BGStory });
     } else {
-      await this.getInfo(ret[0]._id);
+      await this.getInfo(ret[0]._id, StoryId);
     }
   };
-
-  async componentDidMount() {
-    let getID = await process.env.REACT_APP_LineID;
-    let getName = await process.env.REACT_APP_LineName;
-    const { StoryId } = this.props.match.params;
-
-    const liff = window.liff;
-
-    console.log(" is login ", liff.isLoggedIn());
-
-    if (!liff.isLoggedIn()) {
-      console.log("你還沒登入Line哦！");
-      const uri = window.location.href;
-      sessionStorage.setItem("liffLoginRedirect", uri);
-      liff.login();
-    } else {
-      // const liffLoginRedirect = sessionStorage.getItem("liffLoginRedirect");
-      // console.log("red = ", liffLoginRedirect);
-      // if (liffLoginRedirect) {
-      //   sessionStorage.removeItem("liffLoginRedirect");
-      //   window.location.href = liffLoginRedirect;
-      // }
-      liff.getProfile().then((res) => {
-        console.log(res);
-        getID = res.userId;
-      });
-    }
-
-    await this.getMemberID(getID, getName);
-  }
 
   changeActivity = (com) => {
     this.setState({ counter: this.state.counter + 1 });
@@ -194,10 +179,34 @@ export default class MainPage extends Component {
   };
 
   gotoMain = () => {
-    this.setState({ com: Background });
+    // this.setState({ com: Background });
+    this.setState({ com: this.state.origin });
   };
 
+  async componentDidMount() {
+    this.props.com
+      ? this.setState({ com: this.props.com, origin: this.props.com })
+      : void 0;
+    let getID = await process.env.REACT_APP_LineID;
+    let getName = await process.env.REACT_APP_LineName;
+    const { id } = this.props.match.params;
+    const liff = window.liff;
+
+    // if (!liff.isLoggedIn()) {
+    //   const uri = window.location.href;
+    //   sessionStorage.setItem("liffLoginRedirect", uri);
+    //   liff.login();
+    // } else {
+    //   liff.getProfile().then((res) => {
+    //     getID = res.userId;
+    //   });
+    // }
+
+    await this.getMemberID(getID, getName, id);
+  }
+
   render() {
+    console.log("this.state.origin", this.state.origin);
     return (
       <this.state.com
         counter={this.state.counter}
@@ -207,6 +216,8 @@ export default class MainPage extends Component {
         getInfo={this.getInfo}
         resetState={this.resetState}
         gotoMain={this.gotoMain}
+        origin={this.state.origin}
+        from={this.props.from}
       />
     );
   }
