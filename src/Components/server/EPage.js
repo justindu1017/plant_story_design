@@ -41,118 +41,120 @@ export default class EPage extends Component {
 
   render() {
     return (
-      <div className="container">
-        <form>
-          <div className="mb-3">
-            <label htmlFor="storyID" className="form-label">
-              storyID
-            </label>
-            <input
-              className="form-control"
-              autocomplete="off"
-              id="storyID"
-            ></input>
-          </div>
-          <div className="mb-3">
-            <label htmlFor="name" className="form-label">
-              name
-            </label>
-            <input
-              className="form-control"
-              autocomplete="off"
-              id="name"
-            ></input>
-          </div>
-          <div className="mb-3">
-            <label htmlFor="background" className="form-label">
-              background
-            </label>
-            <input
-              className="form-control"
-              autocomplete="off"
-              id="background"
-            ></input>
-          </div>
-          <div className="mb-3">
-            <label htmlFor="storyMain" className="form-label">
-              storyMain
-            </label>
-            <textarea
-              className="form-control"
-              rows={5}
-              id="storyMain"
-              autocomplete="off"
-            ></textarea>
-          </div>
-          <div className="mb-3">
-            <label htmlFor="storySub1" className="form-label">
-              storySub1
-            </label>
-            <textarea
-              className="form-control"
-              rows={5}
-              id="storySub1"
-              autocomplete="off"
-            ></textarea>
-          </div>
-          <div className="mb-3">
-            <label htmlFor="storySub2" className="form-label">
-              storySub2
-            </label>
-            <textarea
-              className="form-control"
-              rows={5}
-              id="storySub2"
-              autocomplete="off"
-            ></textarea>
-          </div>
-          <div className="mb-3">
-            <label htmlFor="storySub3" className="form-label">
-              storySub3
-            </label>
-            <textarea
-              className="form-control"
-              rows={5}
-              id="storySub3"
-              autocomplete="off"
-            ></textarea>
-          </div>
-          <div className="mb-3">
-            <label htmlFor="task" className="form-label">
-              task
-            </label>
-            <textarea
-              className="form-control"
-              rows={5}
-              autocomplete="off"
-              id="task"
-            ></textarea>
-          </div>
-          <div className="mb-3">
-            <label htmlFor="taskStory" className="form-label">
-              taskStory
-            </label>
-            <textarea
-              className="form-control"
-              rows={5}
-              id="taskStory"
-              autocomplete="off"
-            ></textarea>
-          </div>
-          <div className="mb-3">
-            <label htmlFor="badge" className="form-label">
-              badge
-            </label>
-            <input
-              className="form-control"
-              autocomplete="off"
-              id="badge"
-            ></input>
-          </div>
-          <button onClick={this.send} className="btn btn-primary">
-            Submit
-          </button>
-        </form>
+      <div className="w-full bg-main h-100 pt-3">
+        <div className="container">
+          <form>
+            <div className="mb-3">
+              <label htmlFor="storyID" className="form-label">
+                storyID
+              </label>
+              <input
+                className="form-control"
+                autocomplete="off"
+                id="storyID"
+              ></input>
+            </div>
+            <div className="mb-3">
+              <label htmlFor="name" className="form-label">
+                name
+              </label>
+              <input
+                className="form-control"
+                autocomplete="off"
+                id="name"
+              ></input>
+            </div>
+            <div className="mb-3">
+              <label htmlFor="background" className="form-label">
+                background
+              </label>
+              <input
+                className="form-control"
+                autocomplete="off"
+                id="background"
+              ></input>
+            </div>
+            <div className="mb-3">
+              <label htmlFor="storyMain" className="form-label">
+                storyMain
+              </label>
+              <textarea
+                className="form-control"
+                rows={5}
+                id="storyMain"
+                autocomplete="off"
+              ></textarea>
+            </div>
+            <div className="mb-3">
+              <label htmlFor="storySub1" className="form-label">
+                storySub1
+              </label>
+              <textarea
+                className="form-control"
+                rows={5}
+                id="storySub1"
+                autocomplete="off"
+              ></textarea>
+            </div>
+            <div className="mb-3">
+              <label htmlFor="storySub2" className="form-label">
+                storySub2
+              </label>
+              <textarea
+                className="form-control"
+                rows={5}
+                id="storySub2"
+                autocomplete="off"
+              ></textarea>
+            </div>
+            <div className="mb-3">
+              <label htmlFor="storySub3" className="form-label">
+                storySub3
+              </label>
+              <textarea
+                className="form-control"
+                rows={5}
+                id="storySub3"
+                autocomplete="off"
+              ></textarea>
+            </div>
+            <div className="mb-3">
+              <label htmlFor="task" className="form-label">
+                task
+              </label>
+              <textarea
+                className="form-control"
+                rows={5}
+                autocomplete="off"
+                id="task"
+              ></textarea>
+            </div>
+            <div className="mb-3">
+              <label htmlFor="taskStory" className="form-label">
+                taskStory
+              </label>
+              <textarea
+                className="form-control"
+                rows={5}
+                id="taskStory"
+                autocomplete="off"
+              ></textarea>
+            </div>
+            <div className="mb-3">
+              <label htmlFor="badge" className="form-label">
+                badge
+              </label>
+              <input
+                className="form-control"
+                autocomplete="off"
+                id="badge"
+              ></input>
+            </div>
+            <button onClick={this.send} className="btn btn-primary">
+              Submit
+            </button>
+          </form>
+        </div>
       </div>
     );
   }

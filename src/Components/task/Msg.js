@@ -11,6 +11,8 @@ export default class Msg extends Component {
   sendMsg = (e) => {
     // e.preventDefault();
     const obj = {
+      taskComplete: "true",
+
       taskMessages: [
         ...this.props.storyInfo.taskMessages,
         {

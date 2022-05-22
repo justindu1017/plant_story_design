@@ -6,6 +6,7 @@ import BGPic from "../../img/res/BGPic.jpg";
 
 export default class TaskPage extends Component {
   render() {
+    console.log(this.props.storyInfo.storyTemplate.task);
     return (
       <div className="w-full bg-main h-100">
         <div className="h-25">
@@ -17,16 +18,24 @@ export default class TaskPage extends Component {
               <span>
                 <img src={pic} className="w-10" alt="campus"></img>
               </span>
-              實業家任務
+              {/* 實業家任務 */}
+              {this.props.storyInfo.storyTemplate.taskName}
             </div>
 
             <div>
               <span>
                 <img src={pic} className="w-10" alt="campus"></img>
               </span>
-              晚上時間在空曠戶外行走並記錄行走步數
+              {/* 晚上時間在空曠戶外行走並記錄行走步數 */}
+              {this.props.storyInfo.storyTemplate.task}
             </div>
-
+            <div>
+              <span>
+                <img src={pic} className="w-10" alt="campus"></img>
+              </span>
+              {/* 晚上時間在空曠戶外行走並記錄行走步數 */}
+              {this.props.storyInfo.storyTemplate.taskType}
+            </div>
             <div className=" container d-flex justify-content-center w-100 my-3">
               <button
                 onClick={() => {
