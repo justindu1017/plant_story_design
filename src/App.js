@@ -5,10 +5,12 @@ import BadgePage from "./Components/badge/BadgePage";
 import MsgListPage from "./Components/msgList/MsgListPage";
 import PlanetHistoryPage from "./Components/planetHistory/PlanetHistoryPage";
 import EPage from "./Components/server/EPage";
+import Tester from "./Components/test/Tester";
 
 export default class App extends Component {
   render() {
     return (
+      // <Tester />
       <Router>
         <Switch>
           {/* <Route path="/" exact component={MainPage} /> */}

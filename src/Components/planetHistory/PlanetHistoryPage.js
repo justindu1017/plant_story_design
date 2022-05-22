@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PlanetEL from "./PlanetEL";
 import NoPlanetEL from "./NoPlanetEL";
-import pic from "../../img/planetImg/planet-earth.png";
+import pic from "../../img/planetImg/planet.png";
 import chat from "../../img/res/chat.png";
 import toFetch from "../../func/fetchC.js";
 
@@ -57,6 +57,11 @@ export default class PlanetHistoryPage extends Component {
       .addEventListener("show.bs.modal", function (event) {
         var button = event.relatedTarget;
         var recipient = button.getAttribute("data-bs-whatever");
+        var pImg = this.querySelector("#pImg");
+        pImg.src = require(`../../img/${button.getAttribute(
+          "data-bs-id"
+        )}/planet/planet.png`).default;
+
         var toPlanet = this.querySelector("#toPlanet");
         toPlanet.href = recipient;
 
@@ -70,8 +75,14 @@ export default class PlanetHistoryPage extends Component {
       <div className="w-full bg-main h-100 pt-3">
         <div className="d-flex flex-wrap container">
           {this.state.memberInfo.map((el) => {
-            if (el) {
-              return <PlanetEL img={el.badge} id={el._id} />;
+            if (el && el.completion === "true") {
+              return (
+                <PlanetEL
+                  storyID={el.storyTemplate.storyID}
+                  img={el.badge}
+                  id={el._id}
+                />
+              );
             } else {
               return <NoPlanetEL />;
             }
@@ -106,12 +117,19 @@ export default class PlanetHistoryPage extends Component {
                     href=""
                   >
                     <img
+                      id="pImg"
+                      width="100"
+                      heigh="50"
+                      className="float-end ms-2"
+                      alt={"星球圖片"}
+                    ></img>
+                    {/* <img
                       className="m-auto"
                       alt="NOPlanet"
                       src={pic}
                       width="100"
                       heigh="50"
-                    ></img>
+                    ></img> */}
                     <div>星球</div>
                   </a>
 

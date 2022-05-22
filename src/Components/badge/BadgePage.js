@@ -45,14 +45,16 @@ export default class BadgePage extends Component {
 
   render() {
     return (
-      <div className="d-flex flex-wrap container">
-        {this.state.memberInfo.map((el) => {
-          if (el) {
-            return <BadgeEL img={el.storyTemplate.badge} />;
-          } else {
-            return <NoBadgeEL />;
-          }
-        })}
+      <div className="w-full bg-main h-100 pt-3">
+        <div className="d-flex flex-wrap container">
+          {this.state.memberInfo.map((el) => {
+            if (el) {
+              return <BadgeEL storyID={el.storyTemplate.storyID} />;
+            } else {
+              return <NoBadgeEL />;
+            }
+          })}
+        </div>
       </div>
     );
   }

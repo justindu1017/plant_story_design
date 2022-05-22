@@ -1,13 +1,17 @@
 import React, { Component } from "react";
 import CalProgress from "../resources/CalProgress";
 import Title from "../resources/Title";
-import pic from "../../img/planetImg/planet-earth.png";
+import pic from "../../img/003/storyImg/3.png";
 import FooterBanner from "../resources/FooterBanner";
 import GotoNextPage from "../resources/GotoNextPage";
 import NoNextPage from "../resources/NoNextPage";
 import TaskBtn from "../resources/TaskBtn";
-
+const path = require("path");
 export default class Background extends Component {
+  state = {
+    path: "1.png",
+  };
+
   render() {
     return (
       <div className="w-full bg-main h-100 pt-3">
@@ -16,8 +20,14 @@ export default class Background extends Component {
           <CalProgress storyContent={this.props.storyInfo} />
         </div>
         <div className="container mb-5">
-          <img className="float-end w-30 ms-2" src={pic} alt="星球圖片"></img>
-
+          <img
+            src={
+              require(`../../img/${this.props.storyInfo.storyTemplate.storyID}/planet/planet.png`)
+                .default
+            }
+            className="float-end w-30 ms-2"
+            alt={"星球圖片"}
+          ></img>
           <div>{this.props.storyInfo.storyTemplate.background}</div>
 
           {this.props.storyInfo.subProgress === "1" ? (

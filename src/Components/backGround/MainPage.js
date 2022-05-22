@@ -5,6 +5,7 @@ import BGStory from "./BGStory";
 import { useLocation } from "react-router-dom";
 export default class MainPage extends Component {
   state = {
+    imgPath: "",
     origin: Background,
     com: Background,
     counter: -1,
@@ -12,7 +13,7 @@ export default class MainPage extends Component {
       _id: "",
       storyTemplate: {
         _id: "",
-        storyID: "",
+        storyID: "003",
         name: "",
         background: "",
         storyMain: "",
@@ -26,6 +27,7 @@ export default class MainPage extends Component {
         _id: "",
         name: "",
       },
+      prelude: "false",
       subProgress: "",
       badge: "",
       taskMessages: [],
@@ -57,9 +59,12 @@ export default class MainPage extends Component {
       ? FetchgetStoryByID.get()
       : FetchgetActiveStory.post();
 
-    fetchRes
+    await fetchRes
       .then((res) => res.json())
       .then((res) => {
+        res[0].prelude === "false" || res.prelude === "false"
+          ? this.setState({ com: BGStory })
+          : void 0;
         this.setState({ storyInfo: res.length ? res[0] : res });
       });
   };
@@ -72,11 +77,14 @@ export default class MainPage extends Component {
 
   // for newly created user
   createNewMember = async (LineID, LineName) => {
+    console.log("LN", LineName);
     let ret;
     let obj = {
       name: LineName,
       lineID: LineID,
     };
+
+    console.log("ID ", obj);
     const FetchlineID = new toFetch(
       "http://localhost:5000/api/member",
       {
@@ -161,11 +169,12 @@ export default class MainPage extends Component {
     if (ret.length === 0) {
       // no member, need to create
       memberID = await this.createNewMember(LineID, LineName);
+      console.log("MID", memberID);
       await this.linkStory001(memberID);
       await this.getInfo(memberID, StoryId);
-      this.setState({ com: BGStory });
+      // this.setState({ com: BGStory });
     } else {
-      await this.getInfo(ret[0]._id, (StoryId = null));
+      await this.getInfo(ret[0]._id, StoryId);
     }
   };
 
@@ -180,6 +189,16 @@ export default class MainPage extends Component {
 
   gotoMain = () => {
     // this.setState({ com: Background });
+    console.log(this.state.storyInfo._id);
+    const updatePrelude = new toFetch(
+      "http://localhost:5000/api/storyProgress/" + this.state.storyInfo._id,
+      {
+        "Content-Type": "application/json",
+      },
+      JSON.stringify({ prelude: "true" })
+    );
+    updatePrelude.put();
+
     this.setState({ com: this.state.origin });
   };
 
@@ -190,7 +209,9 @@ export default class MainPage extends Component {
       ? this.setState({ com: this.props.com, origin: this.props.com })
       : void 0;
     let getID = await process.env.REACT_APP_LineID;
+    // let getID;
     let getName = await process.env.REACT_APP_LineName;
+    // let getName;
     const { id } = this.props.match.params;
     const liff = window.liff;
 
@@ -201,6 +222,7 @@ export default class MainPage extends Component {
     // } else {
     //   liff.getProfile().then((res) => {
     //     getID = res.userId;
+    //     getName = res.displayName;
     //   });
     // }
 

@@ -46,6 +46,7 @@ export default class TheEndBtn extends Component {
       },
       JSON.stringify({
         completion: "true",
+        prelude: "true",
       })
     );
 

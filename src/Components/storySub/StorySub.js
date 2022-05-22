@@ -16,9 +16,15 @@ export default class StorySub extends Component {
         </div>
         <div className="container">
           <img
+            src={
+              require(`../../img/${
+                this.props.storyInfo.storyTemplate.storyID
+              }/storyImg/${
+                this.props.counter + 1 === 0 ? 1 : this.props.counter + 1
+              }.png`).default
+            }
             className="w-75 d-flex center ms-auto me-auto"
-            src={pic}
-            alt="故事圖片"
+            alt={"故事圖片"}
           ></img>
 
           {this.props.storyInfo.subProgress - 2 > this.props.counter ? (
