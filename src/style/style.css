@@ -46,6 +46,7 @@ html {
 .w-5 {
   width: 5%;
 }
+
 .w-10 {
   width: 10%;
 }
@@ -58,7 +59,7 @@ html {
   height: 5%;
 }
 .h-60 {
-  height: 60%;
+  height: 53%;
 }
 textarea {
   resize: none;
@@ -77,4 +78,11 @@ textarea {
 
 .bg-MissionStart:hover {
   background-color: #94b5b4;
+}
+
+.mw {
+  width: 100%;
+  max-width: 1230;
+
+  max-height: 870px;
 }

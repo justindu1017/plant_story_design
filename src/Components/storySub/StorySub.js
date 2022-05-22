@@ -23,7 +23,7 @@ export default class StorySub extends Component {
                 this.props.counter + 1 === 0 ? 1 : this.props.counter + 1
               }.png`).default
             }
-            className="w-75 d-flex center ms-auto me-auto"
+            className="w-75 d-flex center ms-auto me-auto mw"
             alt={"故事圖片"}
           ></img>
 

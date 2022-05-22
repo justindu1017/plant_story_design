@@ -208,23 +208,34 @@ export default class MainPage extends Component {
     this.props.com
       ? this.setState({ com: this.props.com, origin: this.props.com })
       : void 0;
-    let getID = await process.env.REACT_APP_LineID;
+
+    let Envir = await process.env.REACT_APP_Envir;
+    console.log(Envir);
+    let getID =
+      Envir === "Production" ? await process.env.REACT_APP_LineID : "";
     // let getID;
-    let getName = await process.env.REACT_APP_LineName;
+    let getName =
+      Envir === "Production" ? await process.env.REACT_APP_LineName : "";
     // let getName;
     const { id } = this.props.match.params;
     const liff = window.liff;
+    console.log(!(Envir === "Production"));
+    if (!(Envir === "Production")) {
+      console.log("here");
+      if (!liff.isLoggedIn()) {
+        console.log("已登入");
+        const uri = window.location.href;
+        sessionStorage.setItem("liffLoginRedirect", uri);
+        liff.login();
+      } else {
+        console.log("here2");
 
-    // if (!liff.isLoggedIn()) {
-    //   const uri = window.location.href;
-    //   sessionStorage.setItem("liffLoginRedirect", uri);
-    //   liff.login();
-    // } else {
-    //   liff.getProfile().then((res) => {
-    //     getID = res.userId;
-    //     getName = res.displayName;
-    //   });
-    // }
+        liff.getProfile().then((res) => {
+          getID = res.userId;
+          getName = res.displayName;
+        });
+      }
+    }
 
     await this.getMemberID(getID, getName, id);
   }
