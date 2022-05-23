@@ -9,8 +9,7 @@ export default class ReVisitDoctor extends Component {
   };
 
   haveGOBACK = async () => {
-    const url =
-      "http://localhost:5000/api/storyProgress/" + this.props.storyInfo._id;
+    const url = "/api/storyProgress/" + this.props.storyInfo._id;
     const num =
       this.props.storyInfo.subProgress > 3
         ? "4"

@@ -41,19 +41,16 @@ export default class MainPage extends Component {
   getInfo = async (MemberID, StoryId = null) => {
     const memberID = MemberID;
     const FetchgetActiveStory = new toFetch(
-      "http://localhost:5000/api/storyProgress/getActiveStory",
+      "/api/storyProgress/getActiveStory",
       {
         "Content-Type": "application/json",
       },
       JSON.stringify({ member: memberID })
     );
 
-    const FetchgetStoryByID = new toFetch(
-      "http://localhost:5000/api/storyProgress/" + StoryId,
-      {
-        "Content-Type": "application/json",
-      }
-    );
+    const FetchgetStoryByID = new toFetch("/api/storyProgress/" + StoryId, {
+      "Content-Type": "application/json",
+    });
 
     const fetchRes = StoryId
       ? FetchgetStoryByID.get()
@@ -86,7 +83,7 @@ export default class MainPage extends Component {
 
     console.log("ID ", obj);
     const FetchlineID = new toFetch(
-      "http://localhost:5000/api/member",
+      "/api/member",
       {
         "Content-Type": "application/json",
       },
@@ -107,7 +104,7 @@ export default class MainPage extends Component {
     // !!! conbine with TheEndBTN???
 
     const getByStoryID = new toFetch(
-      "http://localhost:5000/api/storyTemplate/getByStoryID",
+      "/api/storyTemplate/getByStoryID",
       {
         "Content-Type": "application/json",
       },
@@ -138,7 +135,7 @@ export default class MainPage extends Component {
     };
 
     const combineMemberTmp = new toFetch(
-      "http://localhost:5000/api/storyProgress/",
+      "/api/storyProgress/",
       {
         "Content-Type": "application/json",
       },
@@ -151,7 +148,7 @@ export default class MainPage extends Component {
   getMemberID = async (LineID, LineName, StoryId = null, pathname) => {
     let ret;
     const FetchlineID = new toFetch(
-      "http://localhost:5000/api/member/getByLineID/",
+      "/api/member/getByLineID/",
       {
         "Content-Type": "application/json",
       },
@@ -191,7 +188,7 @@ export default class MainPage extends Component {
     // this.setState({ com: Background });
     console.log(this.state.storyInfo._id);
     const updatePrelude = new toFetch(
-      "http://localhost:5000/api/storyProgress/" + this.state.storyInfo._id,
+      "/api/storyProgress/" + this.state.storyInfo._id,
       {
         "Content-Type": "application/json",
       },
@@ -203,19 +200,20 @@ export default class MainPage extends Component {
   };
 
   async componentDidMount() {
+    require("dotenv").config();
+    // console.log();
     const { pathname } = this.props.location;
 
     this.props.com
       ? this.setState({ com: this.props.com, origin: this.props.com })
       : void 0;
 
-    let Envir = await process.env.REACT_APP_Envir;
-    console.log(Envir);
+    let Envir = await process.env["REACT_APP_Envir"];
     let getID =
-      Envir === "Production" ? await process.env.REACT_APP_LineID : "";
+      Envir === "Production" ? await process.env["REACT_APP_LineID"] : "";
     // let getID;
     let getName =
-      Envir === "Production" ? await process.env.REACT_APP_LineName : "";
+      Envir === "Production" ? await process.env["REACT_APP_LineName"] : "";
     // let getName;
     const { id } = this.props.match.params;
     const liff = window.liff;

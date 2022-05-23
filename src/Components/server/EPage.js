@@ -29,7 +29,7 @@ export default class EPage extends Component {
     body.taskStory = taskStory;
     body.badge = badge;
 
-    fetch("http://localhost:5000/api/storyTemplate/", {
+    fetch("/api/storyTemplate/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

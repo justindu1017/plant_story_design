@@ -23,7 +23,7 @@ export default class Msg extends Component {
     };
 
     const toStoryProgress = new toFetch(
-      "http://localhost:5000/api/storyProgress/" + this.props.storyInfo._id,
+      "/api/storyProgress/" + this.props.storyInfo._id,
       {
         "Content-Type": "application/json",
       },
@@ -31,8 +31,7 @@ export default class Msg extends Component {
     );
 
     const toStoryTemplate = new toFetch(
-      "http://localhost:5000/api/storyTemplate/" +
-        this.props.storyInfo.storyTemplate._id,
+      "/api/storyTemplate/" + this.props.storyInfo.storyTemplate._id,
       {
         "Content-Type": "application/json",
       },

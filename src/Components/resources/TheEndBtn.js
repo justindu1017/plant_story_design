@@ -18,7 +18,7 @@ export default class TheEndBtn extends Component {
     );
 
     const getNextStoryID = new toFetch(
-      "http://localhost:5000/api/storyTemplate/getByStoryID",
+      "/api/storyTemplate/getByStoryID",
       {
         "Content-Type": "application/json",
       },
@@ -40,7 +40,7 @@ export default class TheEndBtn extends Component {
 
   setCompletion = async (currerentID) => {
     const setComplete = new toFetch(
-      "http://localhost:5000/api/storyProgress/" + currerentID,
+      "/api/storyProgress/" + currerentID,
       {
         "Content-Type": "application/json",
       },
@@ -67,7 +67,7 @@ export default class TheEndBtn extends Component {
     };
 
     const bind = new toFetch(
-      "http://localhost:5000/api/storyProgress/",
+      "/api/storyProgress/",
       {
         "Content-Type": "application/json",
       },

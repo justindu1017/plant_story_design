@@ -13,7 +13,7 @@ export default class PlanetHistoryPage extends Component {
   getMemberByLineID = async (LineID) => {
     let ret;
     const FetchlineID = new toFetch(
-      "http://localhost:5000/api/member/getByLineID/",
+      "/api/member/getByLineID/",
       {
         "Content-Type": "application/json",
       },
@@ -166,7 +166,7 @@ export default class PlanetHistoryPage extends Component {
   }
   doFetch = (memberID) => {
     // fetch from server by memberID
-    return fetch("http://localhost:5000/api/storyProgress/getByMember", {
+    return fetch("/api/storyProgress/getByMember", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
