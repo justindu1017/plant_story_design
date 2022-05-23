@@ -34,7 +34,9 @@
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <script>
       (async () => {
-        await liff.init({ liffId: "1656053787-a6qvwxW7" });
+        // console.log("%REACT_APP_LiffID%"); // OK
+        // console.log("%NODE_ENV%"); // development
+        await liff.init({ liffId: "%REACT_APP_LiffID%" });
         //   // if (new URL(window.location).searchParams.get("liff.state")) return;
         const liffLoginRedirect = sessionStorage.getItem("liffLoginRedirect");
         if (liffLoginRedirect) {
