@@ -203,7 +203,7 @@ export default class MainPage extends Component {
     require("dotenv").config();
     // console.log();
     const { pathname } = this.props.location;
-
+    console.log("inside mp ", process.env["REACT_APP_LiffID"]);
     this.props.com
       ? this.setState({ com: this.props.com, origin: this.props.com })
       : void 0;
