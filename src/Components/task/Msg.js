@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import FooterBanner from "../resources/FooterBanner";
 import toFetch from "../../func/fetchC.js";
 import MsgEL from "./MsgEL";
+require("dotenv").config();
 
 export default class Msg extends Component {
   getInfo = (memberID) => {
@@ -23,7 +24,9 @@ export default class Msg extends Component {
     };
 
     const toStoryProgress = new toFetch(
-      "/api/storyProgress/" + this.props.storyInfo._id,
+      process.env["REACT_APP_BackendUri"] +
+        "/api/storyProgress/" +
+        this.props.storyInfo._id,
       {
         "Content-Type": "application/json",
       },
@@ -31,7 +34,9 @@ export default class Msg extends Component {
     );
 
     const toStoryTemplate = new toFetch(
-      "/api/storyTemplate/" + this.props.storyInfo.storyTemplate._id,
+      process.env["REACT_APP_BackendUri"] +
+        "/api/storyTemplate/" +
+        this.props.storyInfo.storyTemplate._id,
       {
         "Content-Type": "application/json",
       },

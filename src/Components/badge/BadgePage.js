@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import BadgeEL from "./BadgeEL";
 import NoBadgeEL from "./NoBadgeEL";
 import toFetch from "../../func/fetchC.js";
+require("dotenv").config();
 
 export default class BadgePage extends Component {
   state = {
@@ -11,7 +12,7 @@ export default class BadgePage extends Component {
   getMemberByLineID = async (LineID) => {
     let ret;
     const FetchlineID = new toFetch(
-      "/api/member/getByLineID/",
+      process.env["REACT_APP_BackendUri"] + "/api/member/getByLineID/",
       {
         "Content-Type": "application/json",
       },
@@ -60,13 +61,16 @@ export default class BadgePage extends Component {
   }
   doFetch = (memberID) => {
     // fetch from server by memberID
-    return fetch("/api/storyProgress/getByMember", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ member: memberID }),
-    });
+    return fetch(
+      process.env["REACT_APP_BackendUri"] + "/api/storyProgress/getByMember",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ member: memberID }),
+      }
+    );
   };
   resize = (arr, newSize) => {
     while (newSize > arr.length) arr.push(null);

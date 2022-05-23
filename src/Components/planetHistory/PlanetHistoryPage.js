@@ -4,6 +4,7 @@ import NoPlanetEL from "./NoPlanetEL";
 import pic from "../../img/planetImg/planet.png";
 import chat from "../../img/res/chat.png";
 import toFetch from "../../func/fetchC.js";
+require("dotenv").config();
 
 export default class PlanetHistoryPage extends Component {
   state = {
@@ -13,7 +14,7 @@ export default class PlanetHistoryPage extends Component {
   getMemberByLineID = async (LineID) => {
     let ret;
     const FetchlineID = new toFetch(
-      "/api/member/getByLineID/",
+      process.env["REACT_APP_BackendUri"] + "/api/member/getByLineID/",
       {
         "Content-Type": "application/json",
       },
@@ -33,12 +34,15 @@ export default class PlanetHistoryPage extends Component {
 
   doFetchStoryID = async (storyID) => {
     // fetch from server by memberID
-    return fetch("/api/storyProgress/" + storyID, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    return fetch(
+      process.env["REACT_APP_BackendUri"] + "/api/storyProgress/" + storyID,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
   };
 
   async componentDidMount() {
@@ -166,13 +170,16 @@ export default class PlanetHistoryPage extends Component {
   }
   doFetch = (memberID) => {
     // fetch from server by memberID
-    return fetch("/api/storyProgress/getByMember", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ member: memberID }),
-    });
+    return fetch(
+      process.env["REACT_APP_BackendUri"] + "/api/storyProgress/getByMember",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ member: memberID }),
+      }
+    );
   };
   resize = (arr, newSize) => {
     while (newSize > arr.length) arr.push(null);

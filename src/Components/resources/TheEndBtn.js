@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import toFetch from "../../func/fetchC.js";
+require("dotenv").config();
 
 export default class TheEndBtn extends Component {
   pad(number, length) {
@@ -18,7 +19,7 @@ export default class TheEndBtn extends Component {
     );
 
     const getNextStoryID = new toFetch(
-      "/api/storyTemplate/getByStoryID",
+      process.env["REACT_APP_BackendUri"] + "/api/storyTemplate/getByStoryID",
       {
         "Content-Type": "application/json",
       },
@@ -40,7 +41,7 @@ export default class TheEndBtn extends Component {
 
   setCompletion = async (currerentID) => {
     const setComplete = new toFetch(
-      "/api/storyProgress/" + currerentID,
+      process.env["REACT_APP_BackendUri"] + "/api/storyProgress/" + currerentID,
       {
         "Content-Type": "application/json",
       },
@@ -67,7 +68,7 @@ export default class TheEndBtn extends Component {
     };
 
     const bind = new toFetch(
-      "/api/storyProgress/",
+      process.env["REACT_APP_BackendUri"] + "/api/storyProgress/",
       {
         "Content-Type": "application/json",
       },

@@ -3,6 +3,8 @@ import Background from "./Background";
 import toFetch from "../../func/fetchC.js";
 import BGStory from "./BGStory";
 import { useLocation } from "react-router-dom";
+require("dotenv").config();
+
 export default class MainPage extends Component {
   state = {
     imgPath: "",
@@ -41,16 +43,19 @@ export default class MainPage extends Component {
   getInfo = async (MemberID, StoryId = null) => {
     const memberID = MemberID;
     const FetchgetActiveStory = new toFetch(
-      "/api/storyProgress/getActiveStory",
+      process.env["REACT_APP_BackendUri"] + "/api/storyProgress/getActiveStory",
       {
         "Content-Type": "application/json",
       },
       JSON.stringify({ member: memberID })
     );
 
-    const FetchgetStoryByID = new toFetch("/api/storyProgress/" + StoryId, {
-      "Content-Type": "application/json",
-    });
+    const FetchgetStoryByID = new toFetch(
+      process.env["REACT_APP_BackendUri"] + "/api/storyProgress/" + StoryId,
+      {
+        "Content-Type": "application/json",
+      }
+    );
 
     const fetchRes = StoryId
       ? FetchgetStoryByID.get()
@@ -83,7 +88,7 @@ export default class MainPage extends Component {
 
     console.log("ID ", obj);
     const FetchlineID = new toFetch(
-      "/api/member",
+      process.env["REACT_APP_BackendUri"] + "/api/member",
       {
         "Content-Type": "application/json",
       },
@@ -104,7 +109,7 @@ export default class MainPage extends Component {
     // !!! conbine with TheEndBTN???
 
     const getByStoryID = new toFetch(
-      "/api/storyTemplate/getByStoryID",
+      process.env["REACT_APP_BackendUri"] + "/api/storyTemplate/getByStoryID",
       {
         "Content-Type": "application/json",
       },
@@ -135,7 +140,7 @@ export default class MainPage extends Component {
     };
 
     const combineMemberTmp = new toFetch(
-      "/api/storyProgress/",
+      process.env["REACT_APP_BackendUri"] + "/api/storyProgress/",
       {
         "Content-Type": "application/json",
       },
@@ -148,7 +153,7 @@ export default class MainPage extends Component {
   getMemberID = async (LineID, LineName, StoryId = null, pathname) => {
     let ret;
     const FetchlineID = new toFetch(
-      "/api/member/getByLineID/",
+      process.env["REACT_APP_BackendUri"] + "/api/member/getByLineID/",
       {
         "Content-Type": "application/json",
       },
@@ -188,7 +193,9 @@ export default class MainPage extends Component {
     // this.setState({ com: Background });
     console.log(this.state.storyInfo._id);
     const updatePrelude = new toFetch(
-      "/api/storyProgress/" + this.state.storyInfo._id,
+      process.env["REACT_APP_BackendUri"] +
+        "/api/storyProgress/" +
+        this.state.storyInfo._id,
       {
         "Content-Type": "application/json",
       },
@@ -200,7 +207,6 @@ export default class MainPage extends Component {
   };
 
   async componentDidMount() {
-    require("dotenv").config();
     // console.log();
     const { pathname } = this.props.location;
     console.log("inside mp ", process.env["REACT_APP_LiffID"]);

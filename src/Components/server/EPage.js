@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+require("dotenv").config();
 
 export default class EPage extends Component {
   send(e) {
@@ -29,7 +30,7 @@ export default class EPage extends Component {
     body.taskStory = taskStory;
     body.badge = badge;
 
-    fetch("/api/storyTemplate/", {
+    fetch(process.env["REACT_APP_BackendUri"] + "/api/storyTemplate/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

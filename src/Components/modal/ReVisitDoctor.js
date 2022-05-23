@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import toFetch from "../../func/fetchC.js";
 import StorySub from "../storySub/StorySub.js";
+require("dotenv").config();
 
 export default class ReVisitDoctor extends Component {
   displayCaution = () => {
@@ -9,7 +10,10 @@ export default class ReVisitDoctor extends Component {
   };
 
   haveGOBACK = async () => {
-    const url = "/api/storyProgress/" + this.props.storyInfo._id;
+    const url =
+      process.env["REACT_APP_BackendUri"] +
+      "/api/storyProgress/" +
+      this.props.storyInfo._id;
     const num =
       this.props.storyInfo.subProgress > 3
         ? "4"
