@@ -72,7 +72,7 @@ export default class MainPage extends Component {
         // condition = res[0]
         //   ? res[0].prelude === "false"
         //   : res.prelude === "false";
-
+        console.log("res = ", res);
         condition = Array.isArray(res)
           ? res[0].prelude === "false"
           : res.prelude === "false";
