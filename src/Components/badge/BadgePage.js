@@ -32,9 +32,12 @@ export default class BadgePage extends Component {
 
   async componentDidMount() {
     // get line id
+    let Envir = await process.env["REACT_APP_Envir"];
 
-    let getID = await process.env.REACT_APP_LineID;
-    let memberID = await this.getMemberByLineID(getID);
+    const infoArr = !(Envir == "development")? await this.props.liffLogin():  [await process.env["REACT_APP_LineID"] , await process.env["REACT_APP_LineName"]]
+
+    // let getID = await process.env.REACT_APP_LineID;
+    let memberID = await this.getMemberByLineID(infoArr[0]);
     let memberInfo = await this.doFetch(memberID)
       .then((res) => res.json())
       .then((res) => {
