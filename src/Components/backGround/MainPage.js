@@ -186,9 +186,32 @@ export default class MainPage extends Component {
       await this.getInfo(memberID, StoryId);
       // this.setState({ com: BGStory });
     } else {
+      await this.preCheck(ret[0]._id)
       await this.getInfo(ret[0]._id, StoryId);
     }
   };
+
+  preCheck = async (MamberID)=>{
+    const FetchgetActiveStory = new toFetch(
+      process.env["REACT_APP_BackendUri"] + "/api/storyProgress/getActiveStory",
+      {
+        "Content-Type": "application/json",
+      },
+      JSON.stringify({ member: MamberID })
+    );
+    const activeResult = await FetchgetActiveStory.post().then((res) => res.json())
+    .then((res) => {
+      return res
+    });
+
+    if (!activeResult.length) {
+      // no active Story
+      console.log("No")
+      await this.linkStory001(MamberID)
+      
+    }
+  }
+
 
   changeActivity = (com) => {
     this.setState({ counter: this.state.counter + 1 });
