@@ -264,7 +264,9 @@ export default class MainPage extends Component {
     let getID;
     let getName;
     await (async () => {
-      await liff.init({ liffId: "1656053787-0z4ZO5z3" });
+      // await liff.init({ liffId: "1656053787-0z4ZO5z3" });
+      await liff.init({ liffId: process.env["REACT_APP_LiffID"] });
+
       if (new URL(window.location).searchParams.get("liff.state")) return;
       const liffLoginRedirect = sessionStorage.getItem("liffLoginRedirect");
       if (liffLoginRedirect) {
