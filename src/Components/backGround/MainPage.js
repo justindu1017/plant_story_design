@@ -67,7 +67,13 @@ export default class MainPage extends Component {
       .then((res) => res.json())
       .then((res) => {
         let condition;
-        condition = res[0]
+
+        // testing for prelude
+        // condition = res[0]
+        //   ? res[0].prelude === "false"
+        //   : res.prelude === "false";
+
+        condition = Array.isArray(res)
           ? res[0].prelude === "false"
           : res.prelude === "false";
 

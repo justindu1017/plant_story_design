@@ -28,7 +28,8 @@ export default class Background extends Component {
             className="float-end w-30 ms-2"
             alt={"星球圖片"}
           ></img>
-          <div>{this.props.storyInfo.storyTemplate.background}</div>
+          {/* <div>{this.props.storyInfo.storyTemplate.background}</div> */}
+          <div>{this.props.storyInfo.storyTemplate.storyMain}</div>
 
           {this.props.storyInfo.subProgress === "1" ? (
             <NoNextPage
