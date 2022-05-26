@@ -16,10 +16,10 @@ export default class FooterBanner extends Component {
             this.props.counter === -1
               ? (window.location.href = this.props.from)
               : this.props.counter === 0
-              ? this.props.rollBack(Background)
-              : this.props.from === "Task"
-              ? this.props.rollBack(TaskPage)
-              : this.props.rollBack(StorySub);
+            ? this.props.rollBack(Background)
+            : this.props.from === "Task"
+            ? this.props.rollBack(TaskPage)
+            : this.props.rollBack(StorySub);
           }}
         >
           ◀︎ 上一頁

@@ -29,7 +29,6 @@ export default class EPage extends Component {
     body.task = task;
     body.taskStory = taskStory;
     body.badge = badge;
-
     fetch(process.env["REACT_APP_BackendUri"] + "/api/storyTemplate/", {
       method: "POST",
       headers: {
@@ -37,7 +36,7 @@ export default class EPage extends Component {
       },
       body: JSON.stringify(body),
     }).then((res) => {});
-    window.location.reload(false);
+    // window.location.reload(false);
   }
 
   render() {

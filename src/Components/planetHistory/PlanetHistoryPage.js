@@ -46,8 +46,12 @@ export default class PlanetHistoryPage extends Component {
   };
 
   async componentDidMount() {
+    let Envir = await process.env["REACT_APP_Envir"];
+
+    const infoArr = !(Envir == "development")? await this.props.liffLogin():  [await process.env["REACT_APP_LineID"] , await process.env["REACT_APP_LineName"]]
+
     let getID = await process.env.REACT_APP_LineID;
-    const memberID = await this.getMemberByLineID(getID);
+    const memberID = await this.getMemberByLineID(infoArr[0]);
     let memberInfo = await this.doFetch(memberID)
       .then((res) => res.json())
       .then((res) => {

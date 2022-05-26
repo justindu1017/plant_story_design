@@ -3,10 +3,13 @@ import Background from "./Background";
 import toFetch from "../../func/fetchC.js";
 import BGStory from "./BGStory";
 import { useLocation } from "react-router-dom";
+import ErrHandel from "../resources/ErrHandel";
 require("dotenv").config();
 
 export default class MainPage extends Component {
   state = {
+    LineID:"",
+    LineName:"",
     imgPath: "",
     origin: Background,
     com: Background,
@@ -56,19 +59,28 @@ export default class MainPage extends Component {
         "Content-Type": "application/json",
       }
     );
-
     const fetchRes = StoryId
       ? FetchgetStoryByID.get()
       : FetchgetActiveStory.post();
 
+      
     await fetchRes
       .then((res) => res.json())
       .then((res) => {
-        res[0].prelude === "false" || res.prelude === "false"
-          ? this.setState({ com: BGStory })
-          : void 0;
-        this.setState({ storyInfo: res.length ? res[0] : res });
+        let condition;
+      condition = res[0]?res[0].prelude === "false":res.prelude === "false"
+
+      // res[0].prelude === "false" || res.prelude === "false"
+      condition
+        ? this.setState({ com: BGStory })
+        : void 0;
+      this.setState({ storyInfo: res.length ? res[0] : res });
       });
+
+
+      
+
+
   };
 
   // TODO
@@ -79,14 +91,12 @@ export default class MainPage extends Component {
 
   // for newly created user
   createNewMember = async (LineID, LineName) => {
-    console.log("LN", LineName);
     let ret;
     let obj = {
       name: LineName,
       lineID: LineID,
     };
 
-    console.log("ID ", obj);
     const FetchlineID = new toFetch(
       process.env["REACT_APP_BackendUri"] + "/api/member",
       {
@@ -127,6 +137,7 @@ export default class MainPage extends Component {
 
   // for newly created user
   linkStory001 = async (memberID) => {
+
     const obj = {
       storyTemplate: await this.getTMPByStoryID(),
       member: memberID,
@@ -171,7 +182,6 @@ export default class MainPage extends Component {
     if (ret.length === 0) {
       // no member, need to create
       memberID = await this.createNewMember(LineID, LineName);
-      console.log("MID", memberID);
       await this.linkStory001(memberID);
       await this.getInfo(memberID, StoryId);
       // this.setState({ com: BGStory });
@@ -191,7 +201,6 @@ export default class MainPage extends Component {
 
   gotoMain = () => {
     // this.setState({ com: Background });
-    console.log(this.state.storyInfo._id);
     const updatePrelude = new toFetch(
       process.env["REACT_APP_BackendUri"] +
         "/api/storyProgress/" +
@@ -206,57 +215,110 @@ export default class MainPage extends Component {
     this.setState({ com: this.state.origin });
   };
 
+  reroute(liffLoginRedirect) {
+    if (liffLoginRedirect) {
+      sessionStorage.removeItem("liffLoginRedirect");
+      window.location.href = liffLoginRedirect;
+    }
+  }
+
+
+  async wait(liff) {
+    if (!liff.isLoggedIn()) {
+      const uri = window.location.href;
+      sessionStorage.setItem("liffLoginRedirect", uri);
+      liff.login();
+    } else {
+      liff.getProfile().then((res) => {
+      });
+    }
+  }
+
+
+  liffLogin = async ()=>{
+    const liff = window.liff;
+
+    let getID;
+    let getName;
+    await (async () => {
+      await liff.init({ liffId: "1656053787-0z4ZO5z3" });
+      if (new URL(window.location).searchParams.get("liff.state")) return;
+      const liffLoginRedirect = sessionStorage.getItem("liffLoginRedirect");
+      if (liffLoginRedirect) {
+        sessionStorage.removeItem("liffLoginRedirect");
+        window.location.href = liffLoginRedirect;
+      }
+    })();
+
+    await this.wait(liff);
+    await liff.getProfile().then(res =>{
+      getID = res.userId
+      getName = res.displayName
+    })
+
+    return [getID, getName]
+  }
+
   async componentDidMount() {
-    // console.log();
+    
     const { pathname } = this.props.location;
-    console.log("inside mp ", process.env["REACT_APP_LiffID"]);
     this.props.com
       ? this.setState({ com: this.props.com, origin: this.props.com })
       : void 0;
 
     let Envir = await process.env["REACT_APP_Envir"];
-    let getID =
-      Envir === "Production" ? await process.env["REACT_APP_LineID"] : "";
-    // let getID;
-    let getName =
-      Envir === "Production" ? await process.env["REACT_APP_LineName"] : "";
+    // let getID =
+    //   Envir === "development" ? await process.env["REACT_APP_LineID"] : "";
+    // // let getID;
+    // let getName =
+    //   Envir === "development" ? await process.env["REACT_APP_LineName"] : "";
     // let getName;
     const { id } = this.props.match.params;
-    const liff = window.liff;
-    console.log(!(Envir === "Production"));
-    if (!(Envir === "Production")) {
-      console.log("here");
-      if (!liff.isLoggedIn()) {
-        console.log("已登入");
-        const uri = window.location.href;
-        sessionStorage.setItem("liffLoginRedirect", uri);
-        liff.login();
-      } else {
-        console.log("here2");
 
-        liff.getProfile().then((res) => {
-          getID = res.userId;
-          getName = res.displayName;
-        });
-      }
-    }
+    
+    const infoArr = !(Envir == "development")? await this.liffLogin():  [await process.env["REACT_APP_LineID"] , await process.env["REACT_APP_LineName"]]
+    // const infoArr = !(Envir == "development")? ["ee","tt"]:  [await process.env["REACT_APP_LineID"] , await process.env["REACT_APP_LineName"]]
 
-    await this.getMemberID(getID, getName, id);
+
+    // if (!Envir === "development") {
+    //   await (async () => {
+    //     await liff.init({ liffId: "1656053787-0z4ZO5z3" });
+    //     if (new URL(window.location).searchParams.get("liff.state")) return;
+    //     const liffLoginRedirect = sessionStorage.getItem("liffLoginRedirect");
+    //     if (liffLoginRedirect) {
+    //       sessionStorage.removeItem("liffLoginRedirect");
+    //       window.location.href = liffLoginRedirect;
+    //     }
+    //   })();
+  
+    //   await this.wait(liff);
+  
+    //   await liff.getProfile().then(res =>{
+    //     getID = res.userId
+    //     getName = res.displayName
+    //   })
+    // }
+    // await this.getMemberID(getID, getName, id);
+    
+    this.setState({ LineID: infoArr[0], LineName:infoArr[1] })
+    console.log(this.state)
+    await this.getMemberID(infoArr[0], infoArr[1], id);
   }
 
   render() {
-    return (
-      <this.state.com
-        counter={this.state.counter}
-        storyInfo={this.state.storyInfo}
-        changeActivity={this.changeActivity}
-        rollBack={this.rollBack}
-        getInfo={this.getInfo}
-        resetState={this.resetState}
-        gotoMain={this.gotoMain}
-        origin={this.state.origin}
-        from={this.props.from}
-      />
-    );
+      return (
+        <this.state.com
+          counter={this.state.counter}
+          storyInfo={this.state.storyInfo}
+          changeActivity={this.changeActivity}
+          rollBack={this.rollBack}
+          getInfo={this.getInfo}
+          resetState={this.resetState}
+          gotoMain={this.gotoMain}
+          origin={this.state.origin}
+          from={this.props.from}
+          liffLogin={this.liffLogin}
+        />
+      );    
   }
 }

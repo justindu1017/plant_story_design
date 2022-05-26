@@ -6,7 +6,6 @@ import BGPic from "../../img/res/BGPic.jpg";
 
 export default class TaskPage extends Component {
   render() {
-    console.log(this.props.storyInfo.storyTemplate.task);
     return (
       <div className="w-full bg-main h-100">
         <div className="h-25">

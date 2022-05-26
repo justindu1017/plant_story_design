@@ -18,7 +18,8 @@
       charset="utf-8"
       src="https://static.line-scdn.net/liff/edge/2/sdk.js"
     ></script>
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <link rel="manifest" href="public/manifest.json" />
+    <!-- <link rel="manifest" href="%PUBLIC_URL%/manifest.json" /> -->
     <!--
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
@@ -32,19 +33,7 @@
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
-    <script>
-      (async () => {
-        console.log("%REACT_APP_LiffID%"); // OK
-        // console.log("%NODE_ENV%"); // development
-        await liff.init({ liffId: "%REACT_APP_LiffID%" });
-        //   // if (new URL(window.location).searchParams.get("liff.state")) return;
-        const liffLoginRedirect = sessionStorage.getItem("liffLoginRedirect");
-        if (liffLoginRedirect) {
-          sessionStorage.removeItem("liffLoginRedirect");
-          location.href = liffLoginRedirect;
-        }
-      })();
-    </script>
+
     <div id="root"></div>
     <!--
       This HTML file is a template.
