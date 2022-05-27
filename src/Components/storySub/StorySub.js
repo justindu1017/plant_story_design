@@ -40,6 +40,7 @@ export default class StorySub extends Component {
                 storyInfo={this.props.storyInfo}
                 getInfo={this.props.getInfo}
                 resetState={this.props.resetState}
+                theEnd={this.props.theEnd}
               />
             )
           ) : (

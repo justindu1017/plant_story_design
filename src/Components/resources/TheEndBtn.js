@@ -4,6 +4,9 @@ require("dotenv").config();
 
 export default class TheEndBtn extends Component {
   pad(number, length) {
+    number = number === 5 ? 6 : number;
+    number = number === 7 ? 12 : number;
+
     var str = "" + number;
     while (str.length < length) {
       str = "0" + str;
@@ -33,6 +36,7 @@ export default class TheEndBtn extends Component {
       });
 
     await this.setCompletion(this.props.storyInfo._id);
+    console.log("retrive is ", _id);
     await this.bindNextStory(_id, this.props.storyInfo.member._id);
 
     this.props.getInfo(this.props.storyInfo.member._id);
@@ -52,6 +56,12 @@ export default class TheEndBtn extends Component {
     );
 
     await setComplete.put().catch(() => {});
+  };
+
+  theEnd = async () => {
+    await this.setCompletion(this.props.storyInfo._id);
+    this.props.resetState();
+    this.props.theEnd();
   };
 
   bindNextStory = async (storyTemplateID, memberID) => {
@@ -84,7 +94,10 @@ export default class TheEndBtn extends Component {
         <button
           className="btn btn-mainStory w-100 rounded-3"
           onClick={() => {
-            this.getNextTemplate();
+            console.log("id is ", this.props.storyInfo.storyTemplate.storyID);
+            this.props.storyInfo.storyTemplate.storyID === "012"
+              ? this.theEnd()
+              : this.getNextTemplate();
           }}
         >
           The End

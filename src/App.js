@@ -77,10 +77,10 @@ export default class App extends Component {
           />
 
           {/* <Route path="/:id" component={MainPage} /> */}
-          {/* <Route
+          <Route
             path="/:id"
             render={(props) => <MainPage {...props} from={"/planetHistory"} />}
-          /> */}
+          />
         </Switch>
       </Router>
     );

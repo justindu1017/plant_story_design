@@ -4,6 +4,7 @@ import toFetch from "../../func/fetchC.js";
 import BGStory from "./BGStory";
 import { useLocation } from "react-router-dom";
 import ErrHandel from "../resources/ErrHandel";
+import EndStory from "./EndStory";
 require("dotenv").config();
 
 export default class MainPage extends Component {
@@ -87,6 +88,11 @@ export default class MainPage extends Component {
   resetState = () => {
     this.setState({ counter: -1 });
     this.setState({ com: Background });
+  };
+
+  theEnd = () => {
+    this.setState({ counter: -1 });
+    this.setState({ com: EndStory });
   };
 
   // for newly created user
@@ -206,7 +212,6 @@ export default class MainPage extends Component {
 
     if (!activeResult.length) {
       // no active Story
-      console.log("No");
       await this.linkStory001(MamberID);
     }
   };
@@ -323,8 +328,10 @@ export default class MainPage extends Component {
     // await this.getMemberID(getID, getName, id);
 
     this.setState({ LineID: infoArr[0], LineName: infoArr[1] });
-    console.log(this.state);
-    await this.getMemberID(infoArr[0], infoArr[1], id);
+
+    !(pathname === "/" || id)
+      ? void 0
+      : await this.getMemberID(infoArr[0], infoArr[1], id);
   }
 
   render() {
@@ -341,6 +348,7 @@ export default class MainPage extends Component {
         origin={this.state.origin}
         from={this.props.from}
         liffLogin={this.liffLogin}
+        theEnd={this.theEnd}
       />
     );
   }
