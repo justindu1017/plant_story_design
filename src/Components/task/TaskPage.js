@@ -1,17 +1,28 @@
 import React, { Component } from "react";
 import FooterBanner from "../resources/FooterBanner";
 import Msg from "./Msg";
+import PhotoUpload from "./PhotoUpload";
+
 import pic from "../../img/res/campus.png";
 import BGPic from "../../img/res/BGPic.jpg";
+import Constructing from "../resources/Constructing";
 
 export default class TaskPage extends Component {
   render() {
     return (
       <div className="w-full bg-main h-100">
         <div className="h-25">
-          <img src={BGPic} alt="BGPic" className="w-100"></img>
+          {/* <img src={BGPic} alt="BGPic" className="w-100"></img> */}
+          <img
+            src={
+              require(`../../img/${this.props.storyInfo.storyTemplate.storyID}/task/task.png`)
+                .default
+            }
+            className="w-100"
+            alt={"task"}
+          ></img>
         </div>
-        <div className="container pt-3">
+        <div className="container mt-5 pt-3">
           <div>
             <div>
               <span>
@@ -38,7 +49,11 @@ export default class TaskPage extends Component {
             <div className=" container d-flex justify-content-center w-100 my-3">
               <button
                 onClick={() => {
-                  this.props.changeActivity(Msg);
+                  this.props.storyInfo.storyTemplate.taskType === "message"
+                    ? this.props.changeActivity(Msg)
+                    : this.props.storyInfo.storyTemplate.taskType === "photo"
+                    ? this.props.changeActivity(PhotoUpload)
+                    : this.props.changeActivity(Constructing);
                 }}
                 className=" btn text-white w-75 rounded-3 bg-MissionStart"
               >

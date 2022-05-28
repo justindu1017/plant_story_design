@@ -11,7 +11,6 @@ export default class Msg extends Component {
 
   sendMsg = async (e) => {
     // e.preventDefault();
-    console.log("props ", this.props.storyInfo.taskMessages);
     const obj = {
       taskComplete: "true",
 
@@ -51,8 +50,6 @@ export default class Msg extends Component {
       .then((res) => {
         return res.taskMessages;
       });
-
-    console.log("getMsg = ", getMsg);
 
     let tmpObj = {
       taskMessages: [
