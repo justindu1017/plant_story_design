@@ -40,8 +40,9 @@ html {
   width: 30%;
 }
 .flex-row-item {
-  flex: 1 1 50%; /*grow | shrink | basis */
+  flex: 1 1 33%; /*grow | shrink | basis */
   height: 100px;
+  
 }
 .w-5 {
   width: 5%;

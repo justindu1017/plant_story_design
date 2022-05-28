@@ -96,7 +96,7 @@ export default class Msg extends Component {
   render() {
     return (
       <div className="w-full bg-main h-100 pt-3">
-        <div className="container">
+        <div className="container ">
           {/* <form> */}
           <div className="mb-3">
             <h3 htmlFor="msg" className="form-label">

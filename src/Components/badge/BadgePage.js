@@ -34,7 +34,12 @@ export default class BadgePage extends Component {
     // get line id
     let Envir = await process.env["REACT_APP_Envir"];
 
-    const infoArr = !(Envir == "development")? await this.props.liffLogin():  [await process.env["REACT_APP_LineID"] , await process.env["REACT_APP_LineName"]]
+    const infoArr = !(Envir == "development")
+      ? await this.props.liffLogin()
+      : [
+          await process.env["REACT_APP_LineID"],
+          await process.env["REACT_APP_LineName"],
+        ];
 
     // let getID = await process.env.REACT_APP_LineID;
     let memberID = await this.getMemberByLineID(infoArr[0]);
@@ -49,14 +54,15 @@ export default class BadgePage extends Component {
 
   render() {
     return (
-      <div className="w-full bg-main h-100 pt-3">
+      <div className="w-full bg-main h-100 pt-3  mt-5">
         <div className="d-flex flex-wrap container">
           {this.state.memberInfo.map((el) => {
             if (el) {
-              return <BadgeEL storyID={el.storyTemplate.storyID} />;
-            } else {
-              return <NoBadgeEL />;
+              if (el.taskComplete === "true") {
+                return <BadgeEL storyID={el.storyTemplate.storyID} />;
+              }
             }
+            return <NoBadgeEL />;
           })}
         </div>
       </div>
