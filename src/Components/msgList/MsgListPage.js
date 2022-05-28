@@ -3,11 +3,12 @@ import FooterBanner from "../resources/FooterBanner";
 import MsgEL from "./MsgEL";
 
 export default class MsgListPage extends Component {
+  state = {};
   render() {
     return (
       <div className="w-full bg-main h-100 pt-3">
         <div className="container">
-          {this.props.storyInfo.taskMessages.map((el) => {
+          {this.props.storyTemplate.taskMessages.map((el) => {
             return <MsgEL msgObj={el} />;
           })}
         </div>

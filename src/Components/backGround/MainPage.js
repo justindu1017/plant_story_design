@@ -43,6 +43,28 @@ export default class MainPage extends Component {
       create_date: "",
       __v: "",
     },
+
+    storyTemplate: {
+      _id: "",
+      storyID: "",
+      name: "",
+      background: "",
+      storyRole: "",
+      storyMain: "",
+      storyMainPicPath: "",
+      storySub: ["", "", ""],
+      storySubPicPath: ["", "", ""],
+      task: "",
+      taskName: "",
+      taskType: "",
+      taskStory: "",
+      taskStoryPicPath: "",
+      badge: "",
+      badgePicPath: "",
+      badgeDescription: "",
+      taskMessages: [],
+      __v: "",
+    },
   };
 
   getInfo = async (MemberID, StoryId = null) => {
@@ -284,6 +306,21 @@ export default class MainPage extends Component {
     return [getID, getName];
   };
 
+  getTmp = async (_id) => {
+    console.log(_id);
+    const getter = new toFetch(
+      process.env["REACT_APP_BackendUri"] + "/api/storyTemplate/" + _id,
+      {
+        "Content-Type": "application/json",
+      }
+    );
+
+    await getter
+      .get()
+      .then((res) => res.json())
+      .then((res) => this.setState({ storyTemplate: res }));
+  };
+
   async componentDidMount() {
     const { pathname } = this.props.location;
     this.props.com
@@ -332,6 +369,7 @@ export default class MainPage extends Component {
     !(pathname === "/" || id)
       ? void 0
       : await this.getMemberID(infoArr[0], infoArr[1], id);
+    await this.getTmp(this.state.storyInfo.storyTemplate._id);
   }
 
   render() {
@@ -349,6 +387,7 @@ export default class MainPage extends Component {
         liffLogin={this.liffLogin}
         theEnd={this.theEnd}
         id={this.state.id}
+        storyTemplate={this.state.storyTemplate}
       />
     );
   }

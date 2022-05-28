@@ -5,19 +5,19 @@ import MsgEL from "./MsgEL";
 require("dotenv").config();
 
 export default class Msg extends Component {
-  getInfo = (memberID) => {
-    this.props.getInfo(memberID);
+  getInfo = async (mID, sID) => {
+    await this.props.getInfo(mID, sID);
   };
 
   sendMsg = async (e) => {
-    // e.preventDefault();
+    const time = new Date().toISOString();
     const obj = {
       taskComplete: "true",
 
       taskMessages: [
         ...this.props.storyInfo.taskMessages,
         {
-          m_timestamp: "2022-04-24T15:58:31.777Z",
+          m_timestamp: time,
           message: document.getElementById("msg").value,
         },
       ],
@@ -55,7 +55,7 @@ export default class Msg extends Component {
       taskMessages: [
         ...getMsg,
         {
-          m_timestamp: "2022-04-24T15:58:31.777Z",
+          m_timestamp: time,
           message: document.getElementById("msg").value,
         },
       ],
@@ -71,26 +71,20 @@ export default class Msg extends Component {
       JSON.stringify(tmpObj)
     );
 
-    toStoryProgress
-      .put()
-      .then((res) => {
-        res.json();
-      })
-      .then((res) => {
-        return toStoryTemplate.put();
-      })
-      .then((res) => {
-        return res.json();
-      })
-      .then((res) => {
-        this.getInfo(this.props.storyInfo.member._id);
-        document.getElementById("msg").value = "";
-      })
-      .catch(function (e) {});
+    await toStoryProgress.put();
+    await toStoryTemplate.put();
+    await this.getInfo(
+      this.props.storyInfo.member._id,
+      this.props.storyInfo._id
+    );
+    // this.props.getInfo(this.props.storyInfo.member._id)();
+    document.getElementById("msg").value = "";
   };
+
   style = this.props.id ? "d-none btn btn-primary" : "btn btn-primary";
 
   render() {
+    console.log(this.props.storyInfo);
     return (
       <div className="w-full bg-main h-100 pt-3">
         <div className="container ">
@@ -118,7 +112,6 @@ export default class Msg extends Component {
           >
             Submit
           </button>
-          {/* </form> */}
 
           {this.props.storyInfo.taskMessages.reverse().map((el) => {
             // return
