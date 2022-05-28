@@ -59,7 +59,10 @@ export default class BadgePage extends Component {
           {this.state.memberInfo.map((el) => {
             if (el) {
               if (el.taskComplete === "true") {
-                return <BadgeEL storyID={el.storyTemplate.storyID} />;
+                console.log(el);
+                return (
+                  <BadgeEL _id={el._id} storyID={el.storyTemplate.storyID} />
+                );
               }
             }
             return <NoBadgeEL />;

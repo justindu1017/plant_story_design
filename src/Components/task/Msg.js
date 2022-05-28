@@ -101,7 +101,8 @@ export default class Msg extends Component {
             </h3>
             <br></br>
             <textarea
-              className={this.props.id ? "d-none" : "form-control"}
+              // className={this.props.id ? "d-none" : "form-control"}
+              className="form-control"
               id="msg"
               rows="4"
               cols="50"
@@ -112,7 +113,8 @@ export default class Msg extends Component {
               this.sendMsg();
             }}
             // type="submit"
-            className={this.style}
+            // className={this.style}
+            className={"btn btn-primary"}
           >
             Submit
           </button>

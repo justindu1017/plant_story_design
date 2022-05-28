@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import MainPage from "./Components/backGround/MainPage";
 import BadgePage from "./Components/badge/BadgePage";
+import BadgeShow from "./Components/badge/BadgeShow";
+
 import MsgListPage from "./Components/msgList/MsgListPage";
 import PlanetHistoryPage from "./Components/planetHistory/PlanetHistoryPage";
 import EPage from "./Components/server/EPage";
@@ -54,7 +56,11 @@ export default class App extends Component {
             path="/badge"
             render={(props) => <MainPage {...props} com={BadgePage} />}
           />
-
+          <Route
+            exact
+            path="/badge/:id"
+            render={(props) => <MainPage {...props} com={BadgeShow} />}
+          />
           {/* <Route path="/planetHistory" exact component={PlanetHistoryPage} /> */}
           <Route
             exact
