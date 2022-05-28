@@ -8,7 +8,6 @@ export default class FooterBanner extends Component {
   styleToShow = this.props.counter < 0 && !this.props.from ? "d-none" : "btn";
 
   render() {
-    console.log("counter is ", this.props.counter);
     return (
       <div className=" w-100 foot ">
         <div

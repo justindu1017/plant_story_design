@@ -9,8 +9,9 @@ export default class Msg extends Component {
     this.props.getInfo(memberID);
   };
 
-  sendMsg = (e) => {
+  sendMsg = async (e) => {
     // e.preventDefault();
+    console.log("props ", this.props.storyInfo.taskMessages);
     const obj = {
       taskComplete: "true",
 
@@ -33,6 +34,36 @@ export default class Msg extends Component {
       JSON.stringify(obj)
     );
 
+    // TODO 先fetch Template的MSG
+    const getStoryTemplate = new toFetch(
+      process.env["REACT_APP_BackendUri"] +
+        "/api/storyTemplate/" +
+        this.props.storyInfo.storyTemplate._id,
+      {
+        "Content-Type": "application/json",
+      },
+      null
+    );
+
+    let getMsg = await getStoryTemplate
+      .get()
+      .then((res) => res.json())
+      .then((res) => {
+        return res.taskMessages;
+      });
+
+    console.log("getMsg = ", getMsg);
+
+    let tmpObj = {
+      taskMessages: [
+        ...getMsg,
+        {
+          m_timestamp: "2022-04-24T15:58:31.777Z",
+          message: document.getElementById("msg").value,
+        },
+      ],
+    };
+
     const toStoryTemplate = new toFetch(
       process.env["REACT_APP_BackendUri"] +
         "/api/storyTemplate/" +
@@ -40,7 +71,7 @@ export default class Msg extends Component {
       {
         "Content-Type": "application/json",
       },
-      JSON.stringify(obj)
+      JSON.stringify(tmpObj)
     );
 
     toStoryProgress
@@ -56,9 +87,11 @@ export default class Msg extends Component {
       })
       .then((res) => {
         this.getInfo(this.props.storyInfo.member._id);
+        document.getElementById("msg").value = "";
       })
       .catch(function (e) {});
   };
+  style = this.props.id ? "d-none btn btn-primary" : "btn btn-primary";
 
   render() {
     return (
@@ -66,12 +99,12 @@ export default class Msg extends Component {
         <div className="container">
           {/* <form> */}
           <div className="mb-3">
-            <label htmlFor="msg" className="form-label">
-              Email address
-            </label>
+            <h3 htmlFor="msg" className="form-label">
+              {this.props.storyInfo.storyTemplate.task}
+            </h3>
             <br></br>
             <textarea
-              className="form-control"
+              className={this.props.id ? "d-none" : "form-control"}
               id="msg"
               rows="4"
               cols="50"
@@ -82,7 +115,7 @@ export default class Msg extends Component {
               this.sendMsg();
             }}
             // type="submit"
-            className="btn btn-primary"
+            className={this.style}
           >
             Submit
           </button>

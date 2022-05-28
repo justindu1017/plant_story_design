@@ -86,3 +86,8 @@ textarea {
 
   max-height: 870px;
 }
+
+p,
+div {
+  line-height: 1.8;
+}

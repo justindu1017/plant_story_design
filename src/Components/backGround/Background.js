@@ -50,7 +50,10 @@ export default class Background extends Component {
           <div>
             <h3>支線任務</h3>
             <div>{this.props.storyInfo.storyTemplate.taskStory}</div>
-            <TaskBtn changeActivity={this.props.changeActivity} />
+            <TaskBtn
+              changeActivity={this.props.changeActivity}
+              id={this.props.id}
+            />
           </div>
         </div>
         <FooterBanner

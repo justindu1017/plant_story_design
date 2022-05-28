@@ -9,6 +9,7 @@ require("dotenv").config();
 
 export default class MainPage extends Component {
   state = {
+    id: null,
     LineID: "",
     LineName: "",
     imgPath: "",
@@ -73,7 +74,6 @@ export default class MainPage extends Component {
         // condition = res[0]
         //   ? res[0].prelude === "false"
         //   : res.prelude === "false";
-        console.log("res = ", res);
         condition = Array.isArray(res)
           ? res[0].prelude === "false"
           : res.prelude === "false";
@@ -298,7 +298,7 @@ export default class MainPage extends Component {
     //   Envir === "development" ? await process.env["REACT_APP_LineName"] : "";
     // let getName;
     const { id } = this.props.match.params;
-
+    this.setState({ id: id });
     const infoArr = !(Envir == "development")
       ? await this.liffLogin()
       : [
@@ -335,7 +335,6 @@ export default class MainPage extends Component {
   }
 
   render() {
-    console.log("state = ", this.state);
     return (
       <this.state.com
         counter={this.state.counter}
@@ -349,6 +348,7 @@ export default class MainPage extends Component {
         from={this.props.from}
         liffLogin={this.liffLogin}
         theEnd={this.theEnd}
+        id={this.state.id}
       />
     );
   }
