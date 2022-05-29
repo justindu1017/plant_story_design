@@ -10,9 +10,10 @@ export default class StorySub extends Component {
     return (
       <div className=" bg-main h-100">
         <div className="container pt-5 h-60 overflow-scroll">
-          <p>
+          <pre style={{ whiteSpace: "pre-line" }}>
+            {/* {this.props.storyInfo.storyTemplate.storySub[this.props.counter]} */}
             {this.props.storyInfo.storyTemplate.storySub[this.props.counter]}
-          </p>
+          </pre>
         </div>
         <div className="container">
           <img

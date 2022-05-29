@@ -2,12 +2,18 @@ import React, { Component } from "react";
 import FooterBanner from "../resources/FooterBanner";
 
 export default class BGStory extends Component {
+  changeLine = () => {};
+
+  componentDidMount() {
+    this.changeLine();
+  }
+
   render() {
     return (
       <div className="w-full bg-main h-100 pt-3">
         <div className="container d-flex justify-content-around mb-3">
-          <p>
-            “si tu aimes une fleur qui se trouve dans un etoile, c'est doux, la
+          <pre style={{ whiteSpace: "pre-line" }}>
+            {`“si tu aimes une fleur qui se trouve dans un etoile, c'est doux, la
             nuit, de regarder le ciel.”
             如果你愛著一朵盛開在浩瀚星海裡的花，那麼，當你抬頭仰望繁星時，便會感到心滿意足。
             又一個日出。 小王子睜開雙眼、翻身爬向他的玫瑰。
@@ -20,8 +26,8 @@ export default class BGStory extends Component {
             吱呀一聲，溫室的門被打開。
             「孩子，其實玫瑰需要的不是你的緊張與擔憂，
             對於現階段的她來說，你的歷險故事與快樂才是最重要的。」
-            穿著白袍的玫瑰醫生走了進來。
-          </p>
+            穿著白袍的玫瑰醫生走了進來。`}
+          </pre>
         </div>
         <div className="container pt-3 d-flex justify-content-center">
           <button
