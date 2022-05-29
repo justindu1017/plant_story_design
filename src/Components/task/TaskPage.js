@@ -52,7 +52,7 @@ export default class TaskPage extends Component {
                   this.props.storyInfo.storyTemplate.taskType === "message"
                     ? this.props.changeActivity(Msg)
                     : this.props.storyInfo.storyTemplate.taskType === "photo"
-                    ? this.props.changeActivity(PhotoUpload)
+                    ? this.props.changeActivity(Constructing)
                     : this.props.changeActivity(Constructing);
                 }}
                 className=" btn text-white w-75 rounded-3 bg-MissionStart"
