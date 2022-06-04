@@ -4,12 +4,20 @@ import toFetch from "../../func/fetchC.js";
 import MsgEL from "./MsgEL";
 require("dotenv").config();
 
-export default class Msg extends Component {
+export default class DataTask extends Component {
   getInfo = async (mID, sID) => {
     await this.props.getInfo(mID, sID);
   };
 
   sendMsg = async (e) => {
+    const msg =
+      "心跳: " +
+      document.getElementById("heartBeat").value +
+      "\nDBP: " +
+      document.getElementById("DBP").value +
+      "\nSBP: " +
+      document.getElementById("SBP").value;
+
     const time = new Date().toISOString();
     const obj = {
       taskComplete: "true",
@@ -18,7 +26,7 @@ export default class Msg extends Component {
         ...this.props.storyInfo.taskMessages,
         {
           m_timestamp: time,
-          message: document.getElementById("msg").value,
+          message: msg,
         },
       ],
     };
@@ -56,7 +64,7 @@ export default class Msg extends Component {
         ...getMsg,
         {
           m_timestamp: time,
-          message: document.getElementById("msg").value,
+          message: msg,
         },
       ],
     };
@@ -78,7 +86,9 @@ export default class Msg extends Component {
       this.props.storyInfo._id
     );
     // this.props.getInfo(this.props.storyInfo.member._id)();
-    document.getElementById("msg").value = "";
+    document.getElementById("heartBeat").value = "";
+    document.getElementById("DBP").value = "";
+    document.getElementById("SBP").value = "";
   };
 
   style = this.props.id ? "d-none btn btn-primary" : "btn btn-primary";
@@ -93,13 +103,26 @@ export default class Msg extends Component {
               {this.props.storyInfo.storyTemplate.task}
             </h3>
             <br></br>
-            <textarea
-              // className={this.props.id ? "d-none" : "form-control"}
+            <span>心跳</span>
+            <input
               className="form-control"
-              id="msg"
-              rows="4"
-              cols="50"
-            ></textarea>
+              onkeyup="value=value.replace(/[^\d]/g,'')"
+              id="heartBeat"
+            ></input>
+            <br></br>
+            <span>舒張壓</span>
+            <input
+              className="form-control"
+              onkeyup="value=value.replace(/[^\d]/g,'')"
+              id="DBP"
+            ></input>
+            <br></br>
+            <span>收縮壓</span>
+            <input
+              className="form-control"
+              onkeyup="value=value.replace(/[^\d]/g,'')"
+              id="SBP"
+            ></input>
           </div>
           <button
             onClick={() => {

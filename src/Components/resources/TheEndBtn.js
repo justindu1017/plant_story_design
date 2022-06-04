@@ -15,7 +15,39 @@ export default class TheEndBtn extends Component {
     return str;
   }
 
+  delProcess = async (PID) => {
+    console.log("del = ", PID);
+    // del Process
+    const delProcess = new toFetch(
+      process.env["REACT_APP_BackendUri"] + "/api/storyProgress/" + PID,
+      {
+        "Content-Type": "application/json",
+      }
+    );
+
+    delProcess.delete().catch((err) => console.log(err));
+  };
+
   getNextTemplate = async () => {
+    // const allList = await this.checkAllFinished(
+    //   this.props.storyInfo.member._id
+    // );
+
+    // let counter = 0;
+    // let needPass = false;
+
+    // allList.map((element) => {
+    //   element.storyTemplate.storyID ===
+    //     this.props.storyInfo.storyTemplate.storyID &&
+    //   element.subProgress === "4"
+    //     ? // del Process
+    //       (counter += 1)
+    //     : //
+    //       void 0;
+    //   console.log(counter);
+    //   counter >= 2 ? (needPass = true) : void 0;
+    // });
+
     const nextStoryID = this.pad(
       Number(this.props.storyInfo.storyTemplate.storyID) + 1,
       3
@@ -38,11 +70,31 @@ export default class TheEndBtn extends Component {
     await this.setCompletion(this.props.storyInfo._id);
     await this.bindNextStory(_id, this.props.storyInfo.member._id);
 
+    // needPass ? await this.delProcess(this.props.storyInfo._id) : void 0;
+
     this.props.getInfo(this.props.storyInfo.member._id);
     this.props.resetState();
   };
 
   setCompletion = async (currerentID) => {
+    const allList = await this.checkAllFinished(
+      this.props.storyInfo.member._id
+    );
+
+    let counter = 0;
+    let needPass = false;
+
+    allList.map((element) => {
+      element.storyTemplate.storyID ===
+        this.props.storyInfo.storyTemplate.storyID &&
+      element.subProgress === "4"
+        ? // del Process
+          (counter += 1)
+        : //
+          void 0;
+      counter >= 2 ? (needPass = true) : void 0;
+    });
+
     const setComplete = new toFetch(
       process.env["REACT_APP_BackendUri"] + "/api/storyProgress/" + currerentID,
       {
@@ -55,6 +107,25 @@ export default class TheEndBtn extends Component {
     );
 
     await setComplete.put().catch(() => {});
+    needPass ? await this.delProcess(this.props.storyInfo._id) : void 0;
+  };
+
+  checkAllFinished = async (memberID) => {
+    const getAll = new toFetch(
+      process.env["REACT_APP_BackendUri"] + "/api/storyProgress/getByMember",
+      {
+        "Content-Type": "application/json",
+      },
+      JSON.stringify({ member: memberID })
+    );
+    const allList = await getAll
+      .post()
+      .then((res) => res.json())
+      .then((res) => {
+        return res;
+      });
+
+    return allList;
   };
 
   theEnd = async () => {

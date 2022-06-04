@@ -6,6 +6,7 @@ import PhotoUpload from "./PhotoUpload";
 import pic from "../../img/res/campus.png";
 import BGPic from "../../img/res/BGPic.jpg";
 import Constructing from "../resources/Constructing";
+import DataTask from "./DataTask";
 
 export default class TaskPage extends Component {
   render() {
@@ -51,8 +52,8 @@ export default class TaskPage extends Component {
                 onClick={() => {
                   this.props.storyInfo.storyTemplate.taskType === "message"
                     ? this.props.changeActivity(Msg)
-                    : this.props.storyInfo.storyTemplate.taskType === "photo"
-                    ? this.props.changeActivity(Constructing)
+                    : this.props.storyInfo.storyTemplate.taskType === "data"
+                    ? this.props.changeActivity(DataTask)
                     : this.props.changeActivity(Constructing);
                 }}
                 className=" btn text-white w-75 rounded-3 bg-MissionStart"
