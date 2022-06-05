@@ -12,7 +12,7 @@ export default class TaskPage extends Component {
   render() {
     return (
       <div className="w-full bg-main h-100">
-        <div className="h-25">
+        <div className="">
           {/* <img src={BGPic} alt="BGPic" className="w-100"></img> */}
           <img
             src={
