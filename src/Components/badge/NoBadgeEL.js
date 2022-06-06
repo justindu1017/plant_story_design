@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import pic from "../../img/res/remove.png";
+import pic from "../../img/res/noBadge.png";
 
 export default class NoBadgeEL extends Component {
   render() {
