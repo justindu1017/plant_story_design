@@ -25,27 +25,27 @@ export default class TaskPage extends Component {
         </div>
         <div className="container mt-5 pt-3">
           <div>
-            <div>
-              <span>
-                <img src={pic} className="w-10" alt="campus"></img>
-              </span>
+            <div className="forPic">
+              {/* <span> */}
+              <img src={pic} className="w-10" alt="campus"></img>
+              {/* </span> */}
               {/* 實業家任務 */}
-              {this.props.storyInfo.storyTemplate.taskName}
+              <div>{this.props.storyInfo.storyTemplate.taskName}</div>
             </div>
 
-            <div>
-              <span>
-                <img src={pic} className="w-10" alt="campus"></img>
-              </span>
+            <div className="forPic">
+              {/* <span> */}
+              <img src={pic} className="w-10" alt="campus"></img>
+              {/* </span> */}
               {/* 晚上時間在空曠戶外行走並記錄行走步數 */}
-              {this.props.storyInfo.storyTemplate.task}
+              <div>{this.props.storyInfo.storyTemplate.task}</div>
             </div>
-            <div>
-              <span>
-                <img src={pic} className="w-10" alt="campus"></img>
-              </span>
+            <div className="forPic">
+              {/* <span> */}
+              <img src={pic} className="w-10" alt="campus"></img>
+              {/* </span> */}
               {/* 晚上時間在空曠戶外行走並記錄行走步數 */}
-              {this.props.storyInfo.storyTemplate.taskType}
+              <div>{this.props.storyInfo.storyTemplate.taskType}</div>
             </div>
             <div className=" container d-flex justify-content-center w-100 my-3">
               <button

@@ -45,7 +45,10 @@ html {
 
   height: 100px;
 }
-
+.forPic {
+  display: flex;
+  align-items: center;
+}
 .w-5 {
   width: 5%;
 }
