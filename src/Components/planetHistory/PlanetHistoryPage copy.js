@@ -8,7 +8,6 @@ require("dotenv").config();
 
 export default class PlanetHistoryPage extends Component {
   state = {
-    counter: ["", "", ""],
     memberInfo: [],
   };
 
@@ -64,13 +63,7 @@ export default class PlanetHistoryPage extends Component {
         return res;
       });
     memberInfo = this.resize(memberInfo, 12);
-    const memberInfoArr = [
-      memberInfo.slice(0, 3),
-      memberInfo.slice(3, 6),
-      memberInfo.slice(6, 9),
-      memberInfo.slice(9, 12),
-    ];
-    this.setState({ memberInfo: memberInfoArr });
+    this.setState({ memberInfo: memberInfo });
 
     document
       .getElementById("staticBackdrop")
@@ -93,25 +86,19 @@ export default class PlanetHistoryPage extends Component {
   render() {
     return (
       <div className="w-full bg-main h-100 pt-3 mt-5">
-        <div className="d-flexXXX container">
+        <div className="d-flex flex-wrap container">
           {this.state.memberInfo.map((el) => {
-            return (
-              <div className="Outer d-flex">
-                {el.map((e) => {
-                  if (e && e.completion === "true") {
-                    return (
-                      <PlanetEL
-                        storyID={e.storyTemplate.storyID}
-                        img={e.badge}
-                        id={e._id}
-                      />
-                    );
-                  } else {
-                    return <NoPlanetEL />;
-                  }
-                })}
-              </div>
-            );
+            if (el && el.completion === "true") {
+              return (
+                <PlanetEL
+                  storyID={el.storyTemplate.storyID}
+                  img={el.badge}
+                  id={el._id}
+                />
+              );
+            } else {
+              return <NoPlanetEL />;
+            }
           })}
 
           <div
