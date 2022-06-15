@@ -6,7 +6,7 @@ export default class PlanetEL extends Component {
   render() {
     return (
       <div
-        className="flex-row-item d-flex my-2 justify-content-center "
+        className="flex-row-item d-flex my-2 justify-content-center  w-33"
         data-bs-toggle="modal"
         data-bs-target="#staticBackdrop"
         data-bs-whatever={this.props.id}
